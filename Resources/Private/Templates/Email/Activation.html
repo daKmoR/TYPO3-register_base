@@ -1,0 +1,44 @@
+{namespace x=Tx_Xform_ViewHelpers}
+
+<x:CssToInline cssFile="EXT:register_base/Resources/Private/Templates/Email/Activation.css">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Einladung A</title>
+    <base href="http://local.cms.medianet.at/">
+</head>
+<body>
+	<style type="text/css">
+		a:hover { color: #ff8418 !important; text-decoration: underline; }
+		a:link { color: #475678; text-decoration: underline; }
+		a:visited {color: #475678; text-decoration: underline; }
+	</style>
+	<center>
+		<table cellspacing="0" cellpadding="0" border="0" id="outerTable">
+			<tr>
+				<td align="center" valign="middle" id="header">
+					<p>My Custom Header</p>
+				</td>
+			</tr>
+			<tr>
+				<td id="content">
+					<h1>Dear {frontendUser.firstName}!</h1>
+					<p>I would like to suggest to you the following url: {frontendUser.uid}</p>
+
+					<f:link.action pageUid="9" action="confirm" controller="FrontendUser" extensionName="registerBase" pluginName="Form" arguments="{authCode: frontendUser.mailHash}" absolute="true" noCacheHash="true">confirm</f:link.action>
+					<f:link.action pageUid="9" action="editViaHash" controller="FrontendUser" extensionName="registerBase" pluginName="Form" arguments="{authCode: frontendUser.mailHash}" absolute="true" noCacheHash="true">edit</f:link.action>
+					<br />
+					<p>best regards</p>
+				</td>
+			<tr>
+				<td align="center" valign="middle" id="footer">
+					<p>This message is sent by an link suggestion feature on:</p>
+					<p><strong>"MyCompany Slogan"</strong></p>
+					<p>MyCompany, 1000 MyCity, MyStreet 1</p>
+				</td>
+			</tr>
+		</table>
+	</center>
+</body>
+</html>
+</x:CssToInline>

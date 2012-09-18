@@ -1,0 +1,15 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+<h1>New FrontendUser</h1>
+
+<f:flashMessages />
+
+<f:render partial="FormErrors" />
+
+<f:form action="create"  name="newFrontendUser" object="{newFrontendUser}">
+	<f:render partial="FrontendUser/FormFields" />
+	<f:form.submit value="Create new" />
+</f:form>
+
+</f:section>

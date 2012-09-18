@@ -1,0 +1,20 @@
+config.tx_extbase {
+	persistence {
+		classes {
+			Tx_Extbase_Domain_Model_FrontendUser {
+				subclasses {
+					Tx_RegisterBase_FrontendUser = Tx_RegisterBase_Domain_Model_FrontendUser
+				}
+			}
+			Tx_RegisterBase_Domain_Model_FrontendUser {
+				mapping {
+					tableName = fe_users
+					recordType = Tx_RegisterBase_FrontendUser
+					columns {
+						mailhash.mapOnProperty = mailHash
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,18 @@
+plugin.tx_registerbase {
+	view {
+		templateRootPath = EXT:register_base/Resources/Private/Templates/
+		partialRootPath = EXT:register_base/Resources/Private/Partials/
+		layoutRootPath = EXT:register_base/Resources/Private/Layouts/
+	}
+	persistence {
+		storagePid =
+	}
+	features {
+		# uncomment the following line to enable the new Property Mapper.
+		# rewrittenPropertyMapper = 1
+	}
+	settings {
+		fromEmail = office@company.com
+		fromName = Office Company
+	}
+}

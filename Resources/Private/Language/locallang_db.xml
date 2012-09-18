@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'register_base'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+            
+			<label index="tx_registerbase_domain_model_frontenduser">Frontend User</label>
+			<label index="fe_users.tx_extbase_type.Tx_RegisterBase_FrontendUser">Register using extbase FrontendUser</label>
+			
+		</languageKey>
+	</data>
+</T3locallang>
