@@ -51,6 +51,28 @@ class Tx_RegisterBase_Domain_Model_FrontendUser extends Tx_Extbase_Domain_Model_
 	protected $mailHash;
 
 	/**
+	 * @param string $name
+	 */
+	public function setName($name = NULL) {
+		if ($name === NULL) {
+			parent::setName($this->getFirstName() . ' ' . $this->getLastName());
+		} else {
+			parent::setName($name);
+		}
+	}
+
+	/**
+	 * @param string $username
+	 */
+	public function setUsername($username = NULL) {
+		if ($username === NULL) {
+			parent::setUsername(strtolower($this->getFirstName()) . '.' . strtolower($this->getLastName()));
+		} else {
+			parent::setUsername($username);
+		}
+	}
+
+	/**
 	 * @param string $mailHash
 	 */
 	public function setMailHash($mailHash) {

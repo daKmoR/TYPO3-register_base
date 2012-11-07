@@ -47,6 +47,19 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	}
 
 	/**
+	 * @var Tx_Extbase_Domain_Repository_FrontendUserGroupRepository
+	 */
+	protected $frontendUserGroupRepository;
+
+	/**
+	 * @param Tx_Extbase_Domain_Repository_FrontendUserGroupRepository $frontendUserGroupRepository
+	 * @return void
+	 */
+	public function injectFrontendUserGroupRepository(Tx_Extbase_Domain_Repository_FrontendUserGroupRepository $frontendUserGroupRepository) {
+		$this->frontendUserGroupRepository = $frontendUserGroupRepository;
+	}
+
+	/**
 	 * @var Tx_Extbase_Configuration_ConfigurationManagerInterface
 	 */
 	protected $configurationManager;
@@ -87,6 +100,10 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	 */
 	public function createAction(Tx_RegisterBase_Domain_Model_FrontendUser $newFrontendUser) {
 		$newFrontendUser->disable();
+		$newFrontendUser->setName();
+		$newFrontendUser->setUsername();
+
+		//$defaultFrontEndUserGroup = $this->frontendUserGroupRepository->findAll();
 
 		if ($newFrontendUser->getPassword() === '') {
 			$newFrontendUser->setPassword(t3lib_div::generateRandomBytes(40));
@@ -123,6 +140,9 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	 * @return void
 	 */
 	public function updateAction(Tx_RegisterBase_Domain_Model_FrontendUser $frontendUser) {
+		$frontendUser->setName();
+		$frontendUser->setUsername();
+
 		$this->frontendUserRepository->update($frontendUser);
 		$this->flashMessageContainer->add('Your FrontendUser was updated.');
 		$this->objectManager->get('Tx_Extbase_Persistence_Manager')->persistAll();
@@ -156,11 +176,9 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 
 				$this->view->assign('userActivated', TRUE);
 			}
-
 		} else {
 			$this->view->assign('userNotFound', TRUE);
 		}
-
 	}
 
 	/**
@@ -183,6 +201,8 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 		$emailView = $this->getEmailView('Activation');
 		$emailView->assign('frontendUser', $frontendUser);
 		echo $emailView->render();
+
+		//$this->sendEmail($frontendUser, $emailView->render(););
 	}
 
 	/**
@@ -206,7 +226,7 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	public function sendEmail($frontendUser, $body) {
 		$mail = t3lib_div::makeInstance('t3lib_mail_Message');
 		$mail->setFrom(array($this->settings['fromEmail'] => $this->settings['fromName']));
-		$mail->setTo(array($frontendUser->getEmail() => $frontendUser->getFirstName()));
+		$mail->setTo(array($frontendUser->getEmail() => $frontendUser->getName()));
 		$mail->setSubject('Pls Confirm your registration');
 		$mail->setBody($body, 'text/html');
 		$mail->send();

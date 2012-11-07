@@ -1,12 +1,10 @@
 <f:layout name="Default" />
 
 <f:section name="main">
-<h1>Edit FrontendUser</h1>
 
-<f:render partial="FormErrors" />
+	<f:form action="update" name="frontendUser" object="{frontendUser}" >
+		<f:render partial="FrontendUser/FormFields" arguments="{frontendUser: frontendUser}" />
+		<f:form.submit value="Speichern" />
+	</f:form>
 
-<f:form action="update" name="frontendUser" object="{frontendUser}" >
-	<f:render partial="FrontendUser/FormFields" arguments="{frontendUser: frontendUser}" />
-	<f:form.submit value="Save" />
-</f:form>
 </f:section>

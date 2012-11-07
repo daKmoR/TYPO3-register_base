@@ -22,17 +22,17 @@
 			</tr>
 			<tr>
 				<td id="content">
-					<h1>Dear {frontendUser.firstName}!</h1>
-					<p>I would like to suggest to you the following url: {frontendUser.uid}</p>
+					<h1>Hallo {frontendUser.name}!</h1>
+					<p>Du hast dich für den Newsletter angemeldet. Du müsstest jetzt bitte noch deine E-Mail bestätigen:</p>
+					<p><f:link.action pageUid="10" action="confirm" controller="FrontendUser" extensionName="registerBase" pluginName="Form" arguments="{authCode: frontendUser.mailHash}" absolute="true" noCacheHash="true">bestätigen</f:link.action></p>
 
-					<f:link.action pageUid="9" action="confirm" controller="FrontendUser" extensionName="registerBase" pluginName="Form" arguments="{authCode: frontendUser.mailHash}" absolute="true" noCacheHash="true">confirm</f:link.action>
-					<f:link.action pageUid="9" action="editViaHash" controller="FrontendUser" extensionName="registerBase" pluginName="Form" arguments="{authCode: frontendUser.mailHash}" absolute="true" noCacheHash="true">edit</f:link.action>
+					<p>Weiters hast du die Möglichkeit, deine hinterlegten Daten entsprechend zu ändern:</p>
+					<p><f:link.action pageUid="10" action="editViaHash" controller="FrontendUser" extensionName="registerBase" pluginName="Form" arguments="{authCode: frontendUser.mailHash}" absolute="true" noCacheHash="true">Daten bearbeiten</f:link.action></p>
 					<br />
-					<p>best regards</p>
+					<p>Cheers</p>
 				</td>
 			<tr>
 				<td align="center" valign="middle" id="footer">
-					<p>This message is sent by an link suggestion feature on:</p>
 					<p><strong>"MyCompany Slogan"</strong></p>
 					<p>MyCompany, 1000 MyCity, MyStreet 1</p>
 				</td>
