@@ -106,9 +106,11 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 		//$defaultFrontEndUserGroup = $this->frontendUserGroupRepository->findAll();
 
 		if ($newFrontendUser->getPassword() === '') {
-			$newFrontendUser->setPassword(t3lib_div::generateRandomBytes(40));
+			$tmpPassword = $this->hashService->generateHash(t3lib_div::generateRandomBytes(40));
+			$newFrontendUser->setPassword($tmpPassword);
 		}
 		$mailHash = $this->hashService->generateHash($newFrontendUser->getPassword());
+
 		$newFrontendUser->setMailHash($mailHash);
 
 		$this->frontendUserRepository->add($newFrontendUser);

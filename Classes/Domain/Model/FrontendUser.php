@@ -56,6 +56,9 @@ class Tx_RegisterBase_Domain_Model_FrontendUser extends Tx_Extbase_Domain_Model_
 	public function setName($name = NULL) {
 		if ($name === NULL) {
 			parent::setName($this->getFirstName() . ' ' . $this->getLastName());
+			if ($this->getName() === ' ') {
+				parent::setName($this->getEmail());
+			}
 		} else {
 			parent::setName($name);
 		}
@@ -67,6 +70,9 @@ class Tx_RegisterBase_Domain_Model_FrontendUser extends Tx_Extbase_Domain_Model_
 	public function setUsername($username = NULL) {
 		if ($username === NULL) {
 			parent::setUsername(strtolower($this->getFirstName()) . '.' . strtolower($this->getLastName()));
+			if ($this->getUsername() === '.') {
+				parent::setUsername($this->getEmail());
+			}
 		} else {
 			parent::setUsername($username);
 		}
