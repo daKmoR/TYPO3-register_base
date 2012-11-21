@@ -37,6 +37,7 @@ class Tx_RegisterBase_Domain_Model_FrontendUser extends Tx_Extbase_Domain_Model_
 	 * @var string
 	 * @validate NotEmpty
 	 * @validate EmailAddress
+	 * @validate Tx_RegisterBase_Domain_Validator_UniqueEmailValidator
 	 */
 	protected $email;
 
@@ -44,6 +45,27 @@ class Tx_RegisterBase_Domain_Model_FrontendUser extends Tx_Extbase_Domain_Model_
 	 * @var boolean
 	 */
 	protected $disable;
+
+	/**
+	 * General Terms and Conditions
+	 * @var boolean
+	 * @validate NotEmpty
+	 */
+	protected $gtc;
+
+	/**
+	 * @param boolean $gtc
+	 */
+	public function setGtc($gtc) {
+		$this->gtc = $gtc;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getGtc() {
+		return $this->gtc;
+	}
 
 	/**
 	 * @var string

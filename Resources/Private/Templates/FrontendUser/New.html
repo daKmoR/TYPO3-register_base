@@ -2,8 +2,18 @@
 
 <f:section name="main">
 
-	<f:form action="create"  name="newFrontendUser" object="{newFrontendUser}">
+	<f:render partial="FormErrors" />
+
+	<f:form action="create" name="newFrontendUser" object="{newFrontendUser}">
 		<f:render partial="FrontendUser/FormFields" />
+
+		<table>
+			<tr>
+				<td><label for="gtc">Agb gelesen und akzeptiert*:</label></td>
+				<td><f:form.checkbox value="1" name="newFrontendUser[gtc]" id="gtc" /> Ich stimme der Speicherung, Verarbeitung und Übermittlung meiner personenbezogenen Daten aus dieser Bestellung, sowie der Kontaktaufnahme per Telefon, Fax, SMS oder eMail, auch durch Automaten, zu Informations- und Werbezwecken gegen jederzeitigen Widerruf zu. Bezugsabmeldung nur zum Ende des vereinbarten Belieferungszeitraumes bei vorausgehender sechswöchiger Kündigungsfrist. Gerichtsstand ist Wien.</td>
+			</tr>
+		</table>
+
 		<f:form.submit value="Anmelden" />
 	</f:form>
 

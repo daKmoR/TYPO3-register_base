@@ -6,7 +6,8 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="tx_registerbase_domain_model_frontenduser">FrontendUser</label>
+			<label index="error.email.1242859509">E-Mail ist entweder ungültig oder wird bereits verwendet.</label>
+			<label index="error.gtc.1242859509">Die AGB müssen akzeptiert werden.</label>
 		</languageKey>
 	</data>
 </T3locallang>
