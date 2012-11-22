@@ -202,9 +202,8 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	public function sendActivationEmail(Tx_RegisterBase_Domain_Model_FrontendUser $frontendUser) {
 		$emailView = $this->getEmailView('Activation');
 		$emailView->assign('frontendUser', $frontendUser);
-		echo $emailView->render();
 
-		//$this->sendEmail($frontendUser, $emailView->render(););
+		$this->sendEmail($frontendUser, $emailView->render(), 'medianet Registrierung bestätigen');
 	}
 
 	/**
@@ -213,9 +212,7 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	public function sendConfirmationEmail(Tx_RegisterBase_Domain_Model_FrontendUser $frontendUser) {
 		$emailView = $this->getEmailView('Confirmation');
 		$emailView->assign('frontendUser', $frontendUser);
-		echo $emailView->render();
-
-		//$this->sendEmail($frontendUser, $emailView->render(););
+		$this->sendEmail($frontendUser, $emailView->render(), 'medianet Registrierung erfolgreich');
 	}
 
 	/**
@@ -223,13 +220,14 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	 *
 	 * @param $frontendUser
 	 * @param $body string
+	 * @param $subject
 	 * @return void
 	 */
-	public function sendEmail($frontendUser, $body) {
+	public function sendEmail($frontendUser, $body, $subject) {
 		$mail = t3lib_div::makeInstance('t3lib_mail_Message');
 		$mail->setFrom(array($this->settings['fromEmail'] => $this->settings['fromName']));
 		$mail->setTo(array($frontendUser->getEmail() => $frontendUser->getName()));
-		$mail->setSubject('Pls Confirm your registration');
+		$mail->setSubject($subject);
 		$mail->setBody($body, 'text/html');
 		$mail->send();
 	}

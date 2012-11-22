@@ -4,8 +4,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Einladung A</title>
-    <base href="http://local.cms.medianet.at/">
+	<title>medianet Registrierung bestätigen</title>
 </head>
 <body>
 	<style type="text/css">
@@ -16,11 +15,6 @@
 	<center>
 		<table cellspacing="0" cellpadding="0" border="0" id="outerTable">
 			<tr>
-				<td align="center" valign="middle" id="header">
-					<p>My Custom Header</p>
-				</td>
-			</tr>
-			<tr>
 				<td id="content">
 					<h1>Hallo {frontendUser.name}!</h1>
 					<p>Du hast dich für den Newsletter angemeldet. Du müsstest jetzt bitte noch deine E-Mail bestätigen:</p>
@@ -29,12 +23,7 @@
 					<p>Weiters hast du die Möglichkeit, deine hinterlegten Daten entsprechend zu ändern:</p>
 					<p><f:link.action pageUid="10" action="editViaHash" controller="FrontendUser" extensionName="registerBase" pluginName="Form" arguments="{authCode: frontendUser.mailHash}" absolute="true" noCacheHash="true">Daten bearbeiten</f:link.action></p>
 					<br />
-					<p>Cheers</p>
-				</td>
-			<tr>
-				<td align="center" valign="middle" id="footer">
-					<p><strong>"MyCompany Slogan"</strong></p>
-					<p>MyCompany, 1000 MyCity, MyStreet 1</p>
+					<p>dein medianet Team</p>
 				</td>
 			</tr>
 		</table>
