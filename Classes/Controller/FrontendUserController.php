@@ -224,6 +224,9 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	 * @return void
 	 */
 	public function sendEmail($frontendUser, $body, $subject) {
+		$this->settings['fromEmail'] = 'newsletter@medianet.at';
+		$this->settings['fromName'] = 'medianet';
+
 		$mail = t3lib_div::makeInstance('t3lib_mail_Message');
 		$mail->setFrom(array($this->settings['fromEmail'] => $this->settings['fromName']));
 		$mail->setTo(array($frontendUser->getEmail() => $frontendUser->getName()));

@@ -8,6 +8,9 @@
 		<languageKey index="default" type="array">
 			<label index="error.email.1242859509">E-Mail ist entweder ungültig oder wird bereits verwendet.</label>
 			<label index="error.gtc.1242859509">Die AGB müssen akzeptiert werden.</label>
+			<label index="account.notFound">Der Benutzer wurde nicht gefunden.</label>
+			<label index="account.isActive">Der Benutzer ist bereits aktiv.</label>
+			<label index="account.activated">Der Benutzer wurde aktiviert.</label>
 		</languageKey>
 	</data>
 </T3locallang>

@@ -1,10 +1,8 @@
 <f:if condition="{userNotFound}">
-	<p>User not found</p>
-	<f:translate key="account.not_found"/>
+	<p>Der Benutzer wurde nicht </p>
+	<f:translate key="account.notFound" />
 </f:if><f:if condition="{userAlreadyActive}">
-	<p>User already aktive</p>
-	<f:translate key="account.already_activated" arguments="{0: user.username}" htmlEscape="false"/>
+	<f:translate key="account.isActive" />
 </f:if><f:if condition="{userActivated}">
-	<p>User activated</p>
-	<f:translate key="account.active" arguments="{0: user.username}" htmlEscape="false"/>
+	<f:translate key="account.activated" />
 </f:if>
