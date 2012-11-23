@@ -47,6 +47,19 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	}
 
 	/**
+	 * @var Tx_RegisterBase_Domain_Repository_CategoryRepository
+	 */
+	protected $categoryRepository;
+
+	/**
+	 * @param Tx_RegisterBase_Domain_Repository_CategoryRepository $categoryRepository
+	 * @return void
+	 */
+	public function injectCategoryRepository(Tx_RegisterBase_Domain_Repository_CategoryRepository $categoryRepository) {
+		$this->categoryRepository= $categoryRepository;
+	}
+
+	/**
 	 * @var Tx_Extbase_Domain_Repository_FrontendUserGroupRepository
 	 */
 	protected $frontendUserGroupRepository;
@@ -86,12 +99,25 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	}
 
 	/**
+	 *
+	 */
+	public function initializeAction() {
+		$mappingConfiguration = $this->arguments['newFrontendUser']->getPropertyMappingConfiguration();
+		for ($i = 0; $i < 100; $i++) {
+			$mappingConfiguration->allowCreationForSubProperty('categories.' . $i);
+			$mappingConfiguration->allowModificationForSubProperty('categories.' . $i);
+		}
+	}
+
+	/**
 	 * @param Tx_RegisterBase_Domain_Model_FrontendUser $newFrontendUser
 	 * @dontvalidate $newFrontendUser
 	 * @return void
 	 */
 	public function newAction(Tx_RegisterBase_Domain_Model_FrontendUser $newFrontendUser = NULL) {
 		$this->view->assign('newFrontendUser', $newFrontendUser);
+		$categories = $this->categoryRepository->findAll();
+		$this->view->assign('categories', $categories);
 	}
 
 	/**

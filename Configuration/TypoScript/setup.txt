@@ -6,10 +6,27 @@ plugin.tx_registerbase {
 	}
 	persistence {
 		storagePid =
+		classes {
+			Tx_RegisterBase_Domain_Model_FrontendUser {
+				mapping {
+					columns {
+						module_sys_dmail_category.mapOnProperty = categories
+					}
+				}
+			}
+			Tx_RegisterBase_Domain_Model_Category {
+				mapping {
+					tableName = sys_dmail_category
+					columns {
+						category.mapOnProperty = name
+					}
+				}
+			}
+		}
 	}
 	features {
 		# uncomment the following line to enable the new Property Mapper.
-		# rewrittenPropertyMapper = 1
+		rewrittenPropertyMapper = 1
 	}
 	settings {
 		fromEmail = office@company.com

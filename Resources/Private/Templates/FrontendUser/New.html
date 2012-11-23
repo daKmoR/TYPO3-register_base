@@ -14,6 +14,10 @@
 			</tr>
 		</table>
 
+		<f:for each="{categories}" as="category" iteration="categoryIterator">
+			<p><f:form.checkbox value="{category.uid}" name="newFrontendUser[categories][{categoryIterator.index}]" /> {category.name}</p>
+		</f:for>
+
 		<f:form.submit value="Anmelden" />
 	</f:form>
 

@@ -54,6 +54,24 @@ class Tx_RegisterBase_Domain_Model_FrontendUser extends Tx_Extbase_Domain_Model_
 	protected $gtc;
 
 	/**
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_RegisterBase_Domain_Model_Category>
+	 */
+	protected $categories;
+
+	/**
+	 * @var string
+	 */
+	protected $mailHash;
+
+	/**
+	 * Constructs a new Front-End User
+	 */
+	public function __construct($username = '', $password = '') {
+		parent::__construct($username, $password);
+		$this->categories = new Tx_Extbase_Persistence_ObjectStorage();
+	}
+
+	/**
 	 * @param boolean $gtc
 	 */
 	public function setGtc($gtc) {
@@ -66,11 +84,6 @@ class Tx_RegisterBase_Domain_Model_FrontendUser extends Tx_Extbase_Domain_Model_
 	public function getGtc() {
 		return $this->gtc;
 	}
-
-	/**
-	 * @var string
-	 */
-	protected $mailHash;
 
 	/**
 	 * @param string $name
@@ -147,6 +160,34 @@ class Tx_RegisterBase_Domain_Model_FrontendUser extends Tx_Extbase_Domain_Model_
 	 */
 	public function isEnabled() {
 		return $this->getDisable() === TRUE ? FALSE : TRUE;
+	}
+
+	/**
+	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_RegisterBase_Domain_Model_Category> $categories
+	 */
+	public function setCategories($categories) {
+		$this->categories = $categories;
+	}
+
+	/**
+	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_RegisterBase_Domain_Model_Category>
+	 */
+	public function getCategories() {
+		return $this->categories;
+	}
+
+	/**
+	 * @param Tx_RegisterBase_Domain_Model_Category $category
+	 */
+	public function addCategory(Tx_RegisterBase_Domain_Model_Category $category) {
+		$this->categories->attach($category);
+	}
+
+	/**
+	 * @param Tx_RegisterBase_Domain_Model_Category $category
+	 */
+	public function removeCategory(Tx_RegisterBase_Domain_Model_Category $category) {
+		$this->categories->detach($category);
 	}
 
 }
