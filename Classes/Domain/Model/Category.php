@@ -39,6 +39,11 @@ class Tx_RegisterBase_Domain_Model_Category extends Tx_Extbase_DomainObject_Abst
 	protected $name;
 
 	/**
+	 * @var string
+	 */
+	protected $description;
+
+	/**
 	 * @param string $name
 	 */
 	public function setName($name) {
@@ -50,6 +55,20 @@ class Tx_RegisterBase_Domain_Model_Category extends Tx_Extbase_DomainObject_Abst
 	 */
 	public function getName() {
 		return $this->name;
+	}
+
+	/**
+	 * @param string $description
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDescription() {
+		return $this->description;
 	}
 
 }

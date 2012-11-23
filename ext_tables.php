@@ -30,3 +30,20 @@ $TCA['fe_users']['types'] = array(
 			--div--;LLL:EXT:cms/locallang_tca.xml:fe_users.tabs.extended
 		')
 );
+
+// category
+//$TCA['sys_dmail_category']['interface'] = array(
+//	'showRecordFieldList' => 'hidden,category,description'
+//);
+//$TCA['sys_dmail_category']['types'] = array(
+//	'0' => array('showitem' => 'sys_language_uid;;;;1-1-1, l18n_parent, l18n_diffsource,hidden;;1;;1-1-1, category, description')
+//);
+
+//$TCA['sys_dmail_category']['columns']['description'] = array(
+//	'exclude' => 0,
+//	'label' => 'Beschreibung',
+//	'config' => array(
+//		'type' => 'input',
+//		'size' => '30',
+//	)
+//);
