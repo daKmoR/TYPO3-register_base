@@ -102,10 +102,12 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	 *
 	 */
 	public function initializeAction() {
-		$mappingConfiguration = $this->arguments['newFrontendUser']->getPropertyMappingConfiguration();
-		for ($i = 0; $i < 100; $i++) {
-			$mappingConfiguration->allowCreationForSubProperty('categories.' . $i);
-			$mappingConfiguration->allowModificationForSubProperty('categories.' . $i);
+		if (array_key_exists($this->arguments, 'newFrontendUser')) {
+			$mappingConfiguration = $this->arguments['newFrontendUser']->getPropertyMappingConfiguration();
+			for ($i = 0; $i < 100; $i++) {
+				$mappingConfiguration->allowCreationForSubProperty('categories.' . $i);
+				$mappingConfiguration->allowModificationForSubProperty('categories.' . $i);
+			}
 		}
 	}
 
