@@ -64,6 +64,20 @@ class Tx_RegisterBase_Domain_Model_FrontendUser extends Tx_Extbase_Domain_Model_
 	protected $mailHash;
 
 	/**
+	 * Should the user get newsletters?
+	 *
+	 * @var boolean
+	 */
+	protected $newsletter;
+
+	/**
+	 * If the user gets newsletters let them be in the html format
+	 *
+	 * @var boolean
+	 */
+	protected $newsletterHtmlFormat;
+
+	/**
 	 * Constructs a new Front-End User
 	 */
 	public function __construct($username = '', $password = '') {
@@ -188,6 +202,34 @@ class Tx_RegisterBase_Domain_Model_FrontendUser extends Tx_Extbase_Domain_Model_
 	 */
 	public function removeCategory(Tx_RegisterBase_Domain_Model_Category $category) {
 		$this->categories->detach($category);
+	}
+
+	/**
+	 * @param boolean $newsletter
+	 */
+	public function setNewsletter($newsletter) {
+		$this->newsletter = $newsletter;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getNewsletter() {
+		return $this->newsletter;
+	}
+
+	/**
+	 * @param boolean $newsletterHtmlFormat
+	 */
+	public function setNewsletterHtmlFormat($newsletterHtmlFormat) {
+		$this->newsletterHtmlFormat = $newsletterHtmlFormat;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getNewsletterHtmlFormat() {
+		return $this->newsletterHtmlFormat;
 	}
 
 }

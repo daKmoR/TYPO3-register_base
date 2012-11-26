@@ -11,6 +11,8 @@ plugin.tx_registerbase {
 				mapping {
 					columns {
 						module_sys_dmail_category.mapOnProperty = categories
+						module_sys_dmail_newsletter.mapOnProperty = newsletter
+						module_sys_dmail_html.mapOnProperty = newsletterHtmlFormat
 					}
 				}
 			}

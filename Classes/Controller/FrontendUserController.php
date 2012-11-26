@@ -128,6 +128,8 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 		$newFrontendUser->disable();
 		$newFrontendUser->setName();
 		$newFrontendUser->setUsername();
+		$newFrontendUser->setNewsletter(TRUE);
+		$newFrontendUser->setNewsletterHtmlFormat(TRUE);
 
 		//$defaultFrontEndUserGroup = $this->frontendUserGroupRepository->findAll();
 
