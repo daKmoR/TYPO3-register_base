@@ -17,7 +17,9 @@
 		<table>
 			<f:for each="{categories}" as="category" iteration="categoryIterator">
 				<tr>
-					<td><f:form.checkbox value="{category.uid}" name="newFrontendUser[categories][{categoryIterator.index}]" id="category{category.uid}" /></td>
+					<td>
+						<input id="category{category.uid}" type="checkbox" name="tx_registerbase_form[newFrontendUser][categories][{category.uid}]" value="{category.uid}">
+					</td>
 					<td><label for="category{category.uid}">{category.name}</label></td>
 				</tr>
 			</f:for>
