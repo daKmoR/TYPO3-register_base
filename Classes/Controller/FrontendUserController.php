@@ -118,6 +118,7 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	 */
 	public function newAction(Tx_RegisterBase_Domain_Model_FrontendUser $newFrontendUser = NULL) {
 		$this->view->assign('newFrontendUser', $newFrontendUser);
+		$this->categoryRepository->setDefaultOrderings(array('sorting' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING));
 		$categories = $this->categoryRepository->findAll();
 		$this->view->assign('categories', $categories);
 	}
