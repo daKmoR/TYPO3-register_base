@@ -10,22 +10,24 @@
 		<table>
 			<tr>
 				<td><label for="gtc">Agb gelesen und akzeptiert*:</label></td>
-				<td><f:form.checkbox value="1" name="newFrontendUser[gtc]" id="gtc" /> Ich stimme der Speicherung, Verarbeitung und Übermittlung meiner personenbezogenen Daten aus dieser Bestellung, sowie der Kontaktaufnahme per Telefon, Fax, SMS oder eMail, auch durch Automaten, zu Informations- und Werbezwecken gegen jederzeitigen Widerruf zu. Bezugsabmeldung nur zum Ende des vereinbarten Belieferungszeitraumes bei vorausgehender sechswöchiger Kündigungsfrist. Gerichtsstand ist Wien.</td>
+				<td style="font-size: 10px;"><f:form.checkbox value="1" name="newFrontendUser[gtc]" id="gtc" /> Ich stimme der Speicherung, Verarbeitung und Übermittlung meiner personenbezogenen Daten aus dieser Bestellung, sowie der Kontaktaufnahme per Telefon, Fax, SMS oder eMail, auch durch Automaten, zu Informations- und Werbezwecken gegen jederzeitigen Widerruf zu. Bezugsabmeldung nur zum Ende des vereinbarten Belieferungszeitraumes bei vorausgehender sechswöchiger Kündigungsfrist. Gerichtsstand ist Wien.</td>
 			</tr>
 		</table>
+		<br />
 
 		<table>
 			<f:for each="{categories}" as="category" iteration="categoryIterator">
 				<tr>
-					<td>
-						<input id="category{category.uid}" type="checkbox" name="tx_registerbase_form[newFrontendUser][categories][{category.uid}]" value="{category.uid}">
+					<td width="90" style="text-align: right;">
+						<input id="category{category.uid}" type="checkbox" name="tx_registerbase_form[newFrontendUser][categories][{category.uid}]" value="{category.uid}" style="margin: 0;">
 					</td>
-					<td><label for="category{category.uid}">{category.name}</label></td>
+					<td><label for="category{category.uid}" style="margin: 2px 0 0 5px;">{category.name}</label></td>
 				</tr>
 			</f:for>
 		</table>
+		<br />
 
-		<f:form.submit value="Anmelden" />
+		<f:form.submit value="Anmelden"  style="margin-left: 73px;" />
 	</f:form>
 
 </f:section>
