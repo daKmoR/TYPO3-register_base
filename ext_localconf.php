@@ -7,7 +7,7 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'Form',
 	array(
-		'FrontendUser' => 'new, create, edit, editViaHash, update, delete, confirm',
+		'FrontendUser' => 'new, create, edit, editViaHash, update, delete, deleteViaHash, confirm',
 
 	),
 	// non-cacheable actions
