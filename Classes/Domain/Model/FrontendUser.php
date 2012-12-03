@@ -205,6 +205,14 @@ class Tx_RegisterBase_Domain_Model_FrontendUser extends Tx_Extbase_Domain_Model_
 	}
 
 	/**
+	 * @param Tx_RegisterBase_Domain_Model_Category $category
+	 * @return boolean
+	 */
+	public function hasCategory(Tx_RegisterBase_Domain_Model_Category $category) {
+		return $this->getCategories()->contains($category);
+	}
+
+	/**
 	 * @param boolean $newsletter
 	 */
 	public function setNewsletter($newsletter) {

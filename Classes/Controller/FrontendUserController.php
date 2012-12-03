@@ -165,6 +165,9 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	 * @return void
 	 */
 	public function editAction(Tx_RegisterBase_Domain_Model_FrontendUser $frontendUser) {
+		$this->categoryRepository->setDefaultOrderings(array('sorting' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING));
+		$categories = $this->categoryRepository->findAll();
+		$this->view->assign('categories', $categories);
 		$this->view->assign('frontendUser', $frontendUser);
 	}
 
@@ -180,6 +183,16 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 		$this->flashMessageContainer->add('Your FrontendUser was updated.');
 		$this->objectManager->get('Tx_Extbase_Persistence_Manager')->persistAll();
 		$this->forward('edit', NULL, NULL, array('frontendUser' => $frontendUser));
+	}
+
+	/**
+	 * @param string $authCode
+	 */
+	public function deleteViaHashAction($authCode) {
+		$frontendUser = $this->frontendUserRepository->findByMailHash($authCode);
+		if ($frontendUser instanceof Tx_RegisterBase_Domain_Model_FrontendUser) {
+			$this->forward('delete', NULL, NULL, array('frontendUser' => $frontendUser));
+		}
 	}
 
 	/**
