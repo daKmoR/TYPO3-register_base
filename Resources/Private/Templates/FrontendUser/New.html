@@ -5,15 +5,48 @@
 	<f:render partial="FormErrors" />
 
 	<f:form action="create" name="newFrontendUser" object="{newFrontendUser}">
-		<f:render partial="FrontendUser/FormFields" />
-
 		<table>
+			<tr>
+				<td><label for="firstName">Vorname:</label></td>
+				<td><f:form.textfield property="firstName" id="firstName" /></td>
+			</tr>
+			<tr>
+				<td><label for="lastName">Nachname:</label></td>
+				<td><f:form.textfield property="lastName" id="lastName" /></td>
+			</tr>
+			<tr>
+				<td><label for="email">E-Mail*:</label></td>
+				<td><f:form.textfield property="email" id="email" /></td>
+			</tr>
+			<tr>
+				<td><label for="company">Firmenname:</label></td>
+				<td><f:form.textfield property="company" id="company" /></td>
+			</tr>
+			<tr>
+				<td><label for="address">Strasse:</label></td>
+				<td><f:form.textfield property="address" id="address" /></td>
+			</tr>
+			<tr>
+				<td><label for="zip">PLZ:</label></td>
+				<td><f:form.textfield property="zip" id="zip" /></td>
+			</tr>
+			<tr>
+				<td><label for="city">Ort:</label></td>
+				<td><f:form.textfield property="city" id="city" /></td>
+			</tr>
+			<tr>
+				<td><label for="country">Land:</label></td>
+				<td><f:form.textfield property="country" id="country" /></td>
+			</tr>
+			<tr>
+				<td><label for="telephone">Telefon:</label></td>
+				<td><f:form.textfield property="telephone" id="telephone" /></td>
+			</tr>
 			<tr>
 				<td><label for="gtc">Agb gelesen und akzeptiert*:</label></td>
 				<td style="font-size: 10px;"><f:form.checkbox value="1" name="newFrontendUser[gtc]" id="gtc" /> Ich stimme der Speicherung, Verarbeitung und Übermittlung meiner personenbezogenen Daten aus dieser Bestellung, sowie der Kontaktaufnahme per Telefon, Fax, SMS oder eMail, auch durch Automaten, zu Informations- und Werbezwecken gegen jederzeitigen Widerruf zu. Bezugsabmeldung nur zum Ende des vereinbarten Belieferungszeitraumes bei vorausgehender sechswöchiger Kündigungsfrist. Gerichtsstand ist Wien.</td>
 			</tr>
 		</table>
-		<br />
 
 		<table>
 			<f:for each="{categories}" as="category" iteration="categoryIterator">

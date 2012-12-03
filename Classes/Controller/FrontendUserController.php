@@ -109,6 +109,13 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 				$mappingConfiguration->allowModificationForSubProperty('categories.' . $i);
 			}
 		}
+		if (array_key_exists($this->arguments, 'frontendUser')) {
+			$mappingConfiguration = $this->arguments['frontendUser']->getPropertyMappingConfiguration();
+			for ($i = 0; $i < 100; $i++) {
+				$mappingConfiguration->allowCreationForSubProperty('categories.' . $i);
+				$mappingConfiguration->allowModificationForSubProperty('categories.' . $i);
+			}
+		}
 	}
 
 	/**
@@ -162,13 +169,15 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 
 	/**
 	 * @param Tx_RegisterBase_Domain_Model_FrontendUser $frontendUser
+	 * @param string $updateMessage
 	 * @return void
 	 */
-	public function editAction(Tx_RegisterBase_Domain_Model_FrontendUser $frontendUser) {
+	public function editAction(Tx_RegisterBase_Domain_Model_FrontendUser $frontendUser, $updateMessage = '') {
 		$this->categoryRepository->setDefaultOrderings(array('sorting' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING));
 		$categories = $this->categoryRepository->findAll();
 		$this->view->assign('categories', $categories);
 		$this->view->assign('frontendUser', $frontendUser);
+		$this->view->assign('updateMessage', $updateMessage);
 	}
 
 	/**
@@ -180,9 +189,8 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 		$frontendUser->setUsername();
 
 		$this->frontendUserRepository->update($frontendUser);
-		$this->flashMessageContainer->add('Your FrontendUser was updated.');
 		$this->objectManager->get('Tx_Extbase_Persistence_Manager')->persistAll();
-		$this->forward('edit', NULL, NULL, array('frontendUser' => $frontendUser));
+		$this->forward('edit', NULL, NULL, array('frontendUser' => $frontendUser, 'updateMessage' => 'Die Benutzerdaten wurden geändert.'));
 	}
 
 	/**

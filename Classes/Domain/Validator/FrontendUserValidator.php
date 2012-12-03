@@ -32,7 +32,7 @@
  * @subpackage Validation\Validator
  * @version $Id$
  */
-class Tx_RegisterBase_Domain_Validator_UniqueEmailValidator extends Tx_Extbase_Validation_Validator_AbstractValidator {
+class Tx_RegisterBase_Domain_Validator_FrontendUserValidator extends Tx_Extbase_Validation_Validator_AbstractValidator {
 
 	/**
 	 * @var Tx_RegisterBase_Domain_Repository_FrontendUserRepository
@@ -50,16 +50,17 @@ class Tx_RegisterBase_Domain_Validator_UniqueEmailValidator extends Tx_Extbase_V
 	/**
 	 * Checks if the given email is unique
 	 *
-	 * @param mixed $value The value that should be validated
+	 * @param mixed $frontendUser The value that should be validated
 	 * @return boolean TRUE if the value is valid, FALSE if an error occured
 	 */
-	public function isValid($value) {
-		$this->errors = array();
-		if ($this->frontendUserRepository->findByEmail($value)->count() > 0) {
-			$this->addError('Die E-Mail Adresse ist schon in Verwendung', 1352818549);
-			return FALSE;
+	public function isValid($frontendUser) {
+		$foundFrontendUser = $this->frontendUserRepository->findOneByEmail($frontendUser->getEmail());
+		if ($foundFrontendUser === NULL || $frontendUser->getUid() === $foundFrontendUser->getUid()) {
+			return TRUE;
 		}
-		return TRUE;
+
+		$this->addError('Die E-Mail Adresse ist schon in Verwendung', 1352818549);
+		return FALSE;
 	}
 
 }

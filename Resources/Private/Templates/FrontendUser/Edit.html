@@ -4,8 +4,48 @@
 
 <f:section name="main">
 
+	<p>{updateMessage}</p>
+
 	<f:form action="update" name="frontendUser" object="{frontendUser}" >
-		<f:render partial="FrontendUser/FormFields" arguments="{frontendUser: frontendUser}" />
+		<table>
+			<tr>
+				<td><label for="firstName">Vorname:</label></td>
+				<td><f:form.textfield property="firstName" id="firstName" /></td>
+			</tr>
+			<tr>
+				<td><label for="lastName">Nachname:</label></td>
+				<td><f:form.textfield property="lastName" id="lastName" /></td>
+			</tr>
+			<tr>
+				<td><label for="email">E-Mail*:</label></td>
+				<td>{frontendUser.email} (E-Mail kann nicht bearbeitet werden)</td>
+			</tr>
+			<tr>
+				<td><label for="company">Firmenname:</label></td>
+				<td><f:form.textfield property="company" id="company" /></td>
+			</tr>
+			<tr>
+				<td><label for="address">Strasse:</label></td>
+				<td><f:form.textfield property="address" id="address" /></td>
+			</tr>
+			<tr>
+				<td><label for="zip">PLZ:</label></td>
+				<td><f:form.textfield property="zip" id="zip" /></td>
+			</tr>
+			<tr>
+				<td><label for="city">Ort:</label></td>
+				<td><f:form.textfield property="city" id="city" /></td>
+			</tr>
+			<tr>
+				<td><label for="country">Land:</label></td>
+				<td><f:form.textfield property="country" id="country" /></td>
+			</tr>
+			<tr>
+				<td><label for="telephone">Telefon:</label></td>
+				<td><f:form.textfield property="telephone" id="telephone" /></td>
+			</tr>
+		</table>
+
 		<table>
 			<f:for each="{categories}" as="category" iteration="categoryIterator">
 				<tr>
@@ -13,7 +53,7 @@
 						<input
 							id="category{category.uid}"
 							type="checkbox"
-							name="tx_registerbase_form[newFrontendUser][categories][{category.uid}]"
+							name="tx_registerbase_form[frontendUser][categories][{category.uid}]"
 							value="{category.uid}"
 							style="margin: 0;"
 							{f:if(condition: '{r:userHasCategory(user: frontendUser, category: category)}', then: 'CHECKED=CHECKED', else: '')}

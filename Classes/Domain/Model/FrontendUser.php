@@ -37,7 +37,6 @@ class Tx_RegisterBase_Domain_Model_FrontendUser extends Tx_Extbase_Domain_Model_
 	 * @var string
 	 * @validate NotEmpty
 	 * @validate EmailAddress
-	 * @validate Tx_RegisterBase_Domain_Validator_UniqueEmailValidator
 	 */
 	protected $email;
 
