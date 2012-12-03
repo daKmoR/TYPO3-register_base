@@ -27,6 +27,10 @@ t3lib_extMgm::addTCAcolumns('fe_users',$tempCols);
 $TCA['fe_users']['feInterface']['fe_admin_fieldList'].=',gtc';
 t3lib_extMgm::addToAllTCATypes('fe_users','gtc');
 
+// allows to use the following marker in the newsletter ###USER_mailhash###
+$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['direct_mail']['addRecipFields'] = 'mailhash';
+
+
 // category
 //$TCA['sys_dmail_category']['interface'] = array(
 //	'showRecordFieldList' => 'hidden,category,description'
