@@ -1,4 +1,6 @@
 <?php
+namespace TYPO3\RegisterBase\Domain\ViewHelpers;
+
 /***************************************************************
 *  Copyright notice
 *
@@ -39,17 +41,17 @@
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_RegisterBase_ViewHelpers_UserHasCategoryViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class UserHasCategoryViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * Check if the object has the category
 	 *
 	 * @param object $user The Object to check
-	 * @param Tx_RegisterBase_Domain_Model_Category $category
+	 * @param  \TYPO3\RegisterBase\Domain\Model\Category $category
 	 * @return boolean
 	 * @author Thomas Allmer <at@delusionworld.com>
 	 */
-	public function render($user, Tx_RegisterBase_Domain_Model_Category $category) {
+	public function render($user, \TYPO3\RegisterBase\Domain\Model\Category $category) {
 		if ($user->hasCategory($category)) {
 			return TRUE;
 		}

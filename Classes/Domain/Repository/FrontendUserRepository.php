@@ -1,4 +1,5 @@
 <?php
+namespace TYPO3\RegisterBase\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
@@ -31,11 +32,11 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_RegisterBase_Domain_Repository_FrontendUserRepository extends Tx_Extbase_Persistence_Repository {
+class FrontendUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
 	 * @param $mailHash
-	 * @return Tx_RegisterBase_Domain_Model_FrontendUser
+	 * @return \TYPO3\RegisterBase\Domain\Model\FrontendUser
 	 */
 	public function findByMailHash($mailHash) {
 		$query = $this->createQuery();

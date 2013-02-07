@@ -15,8 +15,8 @@ $EM_CONF[$_EXTKEY] = array(
 	'description' => 'Register fe_user with extbase',
 	'category' => 'plugin',
 	'author' => 'Thomas Allmer',
-	'author_email' => 'thomas.allmer@webteam.at',
-	'author_company' => 'WEBTEAM GmbH',
+	'author_email' => 'd4kmor@gmail.com',
+	'author_company' => 'moodley brand identity',
 	'shy' => '',
 	'priority' => '',
 	'module' => '',
@@ -30,10 +30,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'version' => '',
 	'constraints' => array(
 		'depends' => array(
-			'extbase' => '1.3',
-			'fluid' => '1.3',
-			'typo3' => '4.5',
-			'direct_mail' => ''
+			'typo3' => '6.0',
 		),
 		'conflicts' => array(
 		),

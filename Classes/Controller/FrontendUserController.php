@@ -1,4 +1,5 @@
 <?php
+namespace TYPO3\RegisterBase\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -31,72 +32,31 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_Controller_ActionController {
+class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
-	 * @var Tx_RegisterBase_Domain_Repository_FrontendUserRepository
+	 * @var \TYPO3\RegisterBase\Domain\Repository\FrontendUserRepository
+	 * @inject
 	 */
 	protected $frontendUserRepository;
 
 	/**
-	 * @param Tx_RegisterBase_Domain_Repository_FrontendUserRepository $frontendUserRepository
-	 * @return void
-	 */
-	public function injectFrontendUserRepository(Tx_RegisterBase_Domain_Repository_FrontendUserRepository $frontendUserRepository) {
-		$this->frontendUserRepository = $frontendUserRepository;
-	}
-
-	/**
-	 * @var Tx_RegisterBase_Domain_Repository_CategoryRepository
+	 * @var \TYPO3\RegisterBase\Domain\Repository\CategoryRepository
+	 * @inject
 	 */
 	protected $categoryRepository;
 
 	/**
-	 * @param Tx_RegisterBase_Domain_Repository_CategoryRepository $categoryRepository
-	 * @return void
-	 */
-	public function injectCategoryRepository(Tx_RegisterBase_Domain_Repository_CategoryRepository $categoryRepository) {
-		$this->categoryRepository= $categoryRepository;
-	}
-
-	/**
-	 * @var Tx_Extbase_Domain_Repository_FrontendUserGroupRepository
+	 * @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserGroupRepository
+	 * @inject
 	 */
 	protected $frontendUserGroupRepository;
 
 	/**
-	 * @param Tx_Extbase_Domain_Repository_FrontendUserGroupRepository $frontendUserGroupRepository
-	 * @return void
-	 */
-	public function injectFrontendUserGroupRepository(Tx_Extbase_Domain_Repository_FrontendUserGroupRepository $frontendUserGroupRepository) {
-		$this->frontendUserGroupRepository = $frontendUserGroupRepository;
-	}
-
-	/**
-	 * @var Tx_Extbase_Configuration_ConfigurationManagerInterface
-	 */
-	protected $configurationManager;
-
-	/**
-	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
-	 * @return void
-	 */
-	public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
-		$this->configurationManager = $configurationManager;
-	}
-
-	/**
-	 * @var Tx_Extbase_Security_Cryptography_HashService
+	 * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
+	 * @inject
 	 */
 	protected $hashService;
-
-	/**
-	 * @param Tx_Extbase_Security_Cryptography_HashService $hashService
-	 * @return void
-	 */
-	public function injectHashService(Tx_Extbase_Security_Cryptography_HashService $hashService) {
-		$this->hashService = $hashService;
-	}
 
 	/**
 	 *
@@ -119,41 +79,39 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	}
 
 	/**
-	 * @param Tx_RegisterBase_Domain_Model_FrontendUser $newFrontendUser
+	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $newFrontendUser
 	 * @dontvalidate $newFrontendUser
 	 * @return void
 	 */
-	public function newAction(Tx_RegisterBase_Domain_Model_FrontendUser $newFrontendUser = NULL) {
+	public function newAction(\TYPO3\RegisterBase\Domain\Model\FrontendUser $newFrontendUser = NULL) {
 		$this->view->assign('newFrontendUser', $newFrontendUser);
-		$this->categoryRepository->setDefaultOrderings(array('sorting' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING));
-		$categories = $this->categoryRepository->findAll();
-		$this->view->assign('categories', $categories);
+//		$this->categoryRepository->setDefaultOrderings(array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
+//		$categories = $this->categoryRepository->findAll();
+//		$this->view->assign('categories', $categories);
 	}
 
 	/**
-	 * @param Tx_RegisterBase_Domain_Model_FrontendUser $newFrontendUser
+	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $newFrontendUser
 	 * @return void
 	 */
-	public function createAction(Tx_RegisterBase_Domain_Model_FrontendUser $newFrontendUser) {
+	public function createAction(\TYPO3\RegisterBase\Domain\Model\FrontendUser $newFrontendUser) {
 		$newFrontendUser->disable();
 		$newFrontendUser->setName();
 		$newFrontendUser->setUsername();
 		$newFrontendUser->setNewsletter(TRUE);
 		$newFrontendUser->setNewsletterHtmlFormat(TRUE);
 
-		//$defaultFrontEndUserGroup = $this->frontendUserGroupRepository->findAll();
-
 		if ($newFrontendUser->getPassword() === '') {
-			$tmpPassword = $this->hashService->generateHash(t3lib_div::generateRandomBytes(40));
+			$tmpPassword = $this->hashService->generateHmac(\TYPO3\CMS\Core\Utility\GeneralUtility::generateRandomBytes(40));
 			$newFrontendUser->setPassword($tmpPassword);
 		}
-		$mailHash = $this->hashService->generateHash($newFrontendUser->getPassword());
+		$mailHash = $this->hashService->generateHmac($newFrontendUser->getPassword());
 
 		$newFrontendUser->setMailHash($mailHash);
 
 		$this->frontendUserRepository->add($newFrontendUser);
 
-		$this->objectManager->get('Tx_Extbase_Persistence_Manager')->persistAll();
+		$this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
 		$this->sendActivationEmail($newFrontendUser);
 	}
 
@@ -162,18 +120,18 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	 */
 	public function editViaHashAction($authCode) {
 		$frontendUser = $this->frontendUserRepository->findByMailHash($authCode);
-		if ($frontendUser instanceof Tx_RegisterBase_Domain_Model_FrontendUser) {
+		if ($frontendUser instanceof \TYPO3\RegisterBase\Domain\Model\FrontendUser) {
 			$this->forward('edit', NULL, NULL, array('frontendUser' => $frontendUser));
 		}
 	}
 
 	/**
-	 * @param Tx_RegisterBase_Domain_Model_FrontendUser $frontendUser
+	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser
 	 * @param string $updateMessage
 	 * @return void
 	 */
-	public function editAction(Tx_RegisterBase_Domain_Model_FrontendUser $frontendUser, $updateMessage = '') {
-		$this->categoryRepository->setDefaultOrderings(array('sorting' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING));
+	public function editAction(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser, $updateMessage = '') {
+		$this->categoryRepository->setDefaultOrderings(array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
 		$categories = $this->categoryRepository->findAll();
 		$this->view->assign('categories', $categories);
 		$this->view->assign('frontendUser', $frontendUser);
@@ -181,10 +139,10 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	}
 
 	/**
-	 * @param Tx_RegisterBase_Domain_Model_FrontendUser $frontendUser
+	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser
 	 * @return void
 	 */
-	public function updateAction(Tx_RegisterBase_Domain_Model_FrontendUser $frontendUser) {
+	public function updateAction(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser) {
 		$frontendUser->setName();
 		$frontendUser->setUsername();
 
@@ -198,16 +156,16 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	 */
 	public function deleteViaHashAction($authCode) {
 		$frontendUser = $this->frontendUserRepository->findByMailHash($authCode);
-		if ($frontendUser instanceof Tx_RegisterBase_Domain_Model_FrontendUser) {
+		if ($frontendUser instanceof \TYPO3\RegisterBase\Domain\Model\FrontendUser) {
 			$this->forward('delete', NULL, NULL, array('frontendUser' => $frontendUser));
 		}
 	}
 
 	/**
-	 * @param Tx_RegisterBase_Domain_Model_FrontendUser $frontendUser
+	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser
 	 * @return void
 	 */
-	public function deleteAction(Tx_RegisterBase_Domain_Model_FrontendUser $frontendUser) {
+	public function deleteAction(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser) {
 		$this->frontendUserRepository->remove($frontendUser);
 	}
 
@@ -219,7 +177,7 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	public function confirmAction($authCode) {
 		$frontendUser = $this->frontendUserRepository->findByMailHash($authCode);
 
-		if ($frontendUser instanceof Tx_RegisterBase_Domain_Model_FrontendUser) {
+		if ($frontendUser instanceof \TYPO3\RegisterBase\Domain\Model\FrontendUser) {
 			$this->view->assign('frontendUser', $frontendUser);
 			if ($frontendUser->isEnabled()) {
 				$this->view->assign('userAlreadyActive', TRUE);
@@ -240,8 +198,8 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	 * @return object
 	 */
 	public function getEmailView($name) {
-		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-		$templateRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
+		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+		$templateRootPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
 		$emailView = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
 		$emailView->setTemplatePathAndFilename($templateRootPath . 'Email/' . $name . '.html');
 		$emailView->assign('templateRootPath', $templateRootPath);
@@ -249,9 +207,9 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	}
 
 	/**
-	 * @param Tx_RegisterBase_Domain_Model_FrontendUser $frontendUser
+	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser
 	 */
-	public function sendActivationEmail(Tx_RegisterBase_Domain_Model_FrontendUser $frontendUser) {
+	public function sendActivationEmail(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser) {
 		$emailView = $this->getEmailView('Activation');
 		$emailView->assign('frontendUser', $frontendUser);
 
@@ -259,9 +217,9 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 	}
 
 	/**
-	 * @param Tx_RegisterBase_Domain_Model_FrontendUser $frontendUser
+	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser
 	 */
-	public function sendConfirmationEmail(Tx_RegisterBase_Domain_Model_FrontendUser $frontendUser) {
+	public function sendConfirmationEmail(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser) {
 		$emailView = $this->getEmailView('Confirmation');
 		$emailView->assign('frontendUser', $frontendUser);
 		$this->sendEmail($frontendUser, $emailView->render(), 'medianet Registrierung erfolgreich');
@@ -279,7 +237,8 @@ class Tx_RegisterBase_Controller_FrontendUserController extends Tx_Extbase_MVC_C
 		$this->settings['fromEmail'] = 'newsletter@medianet.at';
 		$this->settings['fromName'] = 'medianet';
 
-		$mail = t3lib_div::makeInstance('t3lib_mail_Message');
+		//$mail = t3lib_div::makeInstance('t3lib_mail_Message');
+		$mail = $this->objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
 		$mail->setFrom(array($this->settings['fromEmail'] => $this->settings['fromName']));
 		$mail->setTo(array($frontendUser->getEmail() => $frontendUser->getName()));
 		$mail->setSubject($subject);

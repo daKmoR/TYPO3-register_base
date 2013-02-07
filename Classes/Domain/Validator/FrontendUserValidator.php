@@ -1,4 +1,6 @@
 <?php
+namespace TYPO3\RegisterBase\Domain\Validator;
+
 /***************************************************************
 *  Copyright notice
 *
@@ -32,20 +34,13 @@
  * @subpackage Validation\Validator
  * @version $Id$
  */
-class Tx_RegisterBase_Domain_Validator_FrontendUserValidator extends Tx_Extbase_Validation_Validator_AbstractValidator {
+class FrontendUserValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
 
 	/**
-	 * @var Tx_RegisterBase_Domain_Repository_FrontendUserRepository
+	 * @var \TYPO3\RegisterBase\Domain\Repository\FrontendUserRepository
+	 * @inject
 	 */
 	protected $frontendUserRepository;
-
-	/**
-	 * @param Tx_RegisterBase_Domain_Repository_FrontendUserRepository $frontendUserRepository
-	 * @return void
-	 */
-	public function injectFrontendUserRepository(Tx_RegisterBase_Domain_Repository_FrontendUserRepository $frontendUserRepository) {
-		$this->frontendUserRepository = $frontendUserRepository;
-	}
 
 	/**
 	 * Checks if the given email is unique

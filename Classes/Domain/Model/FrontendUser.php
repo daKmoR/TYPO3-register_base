@@ -1,4 +1,5 @@
 <?php
+namespace TYPO3\RegisterBase\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_RegisterBase_Domain_Model_FrontendUser extends Tx_Extbase_Domain_Model_FrontendUser {
+class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 
 	/**
 	 * @var string
@@ -53,7 +54,7 @@ class Tx_RegisterBase_Domain_Model_FrontendUser extends Tx_Extbase_Domain_Model_
 	protected $gtc;
 
 	/**
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_RegisterBase_Domain_Model_Category>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Tx_RegisterBase_Domain_Model_Category>
 	 */
 	protected $categories;
 
@@ -81,7 +82,7 @@ class Tx_RegisterBase_Domain_Model_FrontendUser extends Tx_Extbase_Domain_Model_
 	 */
 	public function __construct($username = '', $password = '') {
 		parent::__construct($username, $password);
-		$this->categories = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
@@ -176,38 +177,38 @@ class Tx_RegisterBase_Domain_Model_FrontendUser extends Tx_Extbase_Domain_Model_
 	}
 
 	/**
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_RegisterBase_Domain_Model_Category> $categories
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\RegisterBase\Domain\Model\Category> $categories
 	 */
 	public function setCategories($categories) {
 		$this->categories = $categories;
 	}
 
 	/**
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_RegisterBase_Domain_Model_Category>
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\RegisterBase\Domain\Model\Category>
 	 */
 	public function getCategories() {
 		return $this->categories;
 	}
 
 	/**
-	 * @param Tx_RegisterBase_Domain_Model_Category $category
+	 * @param \TYPO3\RegisterBase\Domain\Model\Category $category
 	 */
-	public function addCategory(Tx_RegisterBase_Domain_Model_Category $category) {
+	public function addCategory(\TYPO3\RegisterBase\Domain\Model\Category $category) {
 		$this->categories->attach($category);
 	}
 
 	/**
-	 * @param Tx_RegisterBase_Domain_Model_Category $category
+	 * @param \TYPO3\RegisterBase\Domain\Model\Category $category
 	 */
-	public function removeCategory(Tx_RegisterBase_Domain_Model_Category $category) {
+	public function removeCategory(\TYPO3\RegisterBase\Domain\Model\Category $category) {
 		$this->categories->detach($category);
 	}
 
 	/**
-	 * @param Tx_RegisterBase_Domain_Model_Category $category
+	 * @param \TYPO3\RegisterBase\Domain\Model\Category $category
 	 * @return boolean
 	 */
-	public function hasCategory(Tx_RegisterBase_Domain_Model_Category $category) {
+	public function hasCategory(\TYPO3\RegisterBase\Domain\Model\Category $category) {
 		return $this->getCategories()->contains($category);
 	}
 

@@ -1,4 +1,5 @@
 <?php
+namespace TYPO3\RegisterBase\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
@@ -31,6 +32,6 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_RegisterBase_Domain_Repository_CategoryRepository extends Tx_Extbase_Persistence_Repository {
+class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 }

@@ -1,17 +1,28 @@
 config.tx_extbase {
 	persistence {
 		classes {
-			Tx_Extbase_Domain_Model_FrontendUser {
+			TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 				subclasses {
-					Tx_RegisterBase_FrontendUser = Tx_RegisterBase_Domain_Model_FrontendUser
+					TYPO3_RegisterBase_Domain_Model_FrontendUser = TYPO3_RegisterBase_Domain_Model_FrontendUser
 				}
 			}
-			Tx_RegisterBase_Domain_Model_FrontendUser {
+			TYPO3\RegisterBase\Domain\Model\FrontendUser {
 				mapping {
 					tableName = fe_users
-					recordType = Tx_RegisterBase_FrontendUser
+					#recordType = Tx_RegisterBase_FrontendUser
 					columns {
 						mailhash.mapOnProperty = mailHash
+						module_sys_dmail_category.mapOnProperty = categories
+						module_sys_dmail_newsletter.mapOnProperty = newsletter
+						module_sys_dmail_html.mapOnProperty = newsletterHtmlFormat
+					}
+				}
+			}
+			TYPO3\RegisterBase\Domain\Model\Category {
+				mapping {
+					tableName = sys_dmail_category
+					columns {
+						category.mapOnProperty = name
 					}
 				}
 			}

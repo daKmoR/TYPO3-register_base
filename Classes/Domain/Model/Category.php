@@ -1,4 +1,5 @@
 <?php
+namespace TYPO3\RegisterBase\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_RegisterBase_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEntity {
+class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * @var string
