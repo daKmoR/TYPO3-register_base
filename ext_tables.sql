@@ -4,6 +4,8 @@
 CREATE TABLE fe_users (
 	mailhash varchar(60) DEFAULT '',
 	gtc tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	module_sys_dmail_newsletter tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	module_sys_dmail_html tinyint(4) unsigned DEFAULT '0' NOT NULL,
 );
 
 #

@@ -14,13 +14,13 @@
 			<tr>
 				<td id="content">
 					<h1>Hallo {frontendUser.name}!</h1>
-					<p>Du hast dich für den Newsletter angemeldet. Du müsstest jetzt bitte noch deine E-Mail bestätigen:</p>
-					<p><f:link.action pageUid="10" action="confirm" controller="FrontendUser" extensionName="registerBase" pluginName="Form" arguments="{authCode: frontendUser.mailHash}" absolute="true" noCacheHash="true">bestätigen</f:link.action></p>
+					<p>Du hast dich angemeldet. Du müsstest jetzt bitte noch deine E-Mail bestätigen:</p>
+					<p><f:link.action pageUid="131" action="confirm" controller="FrontendUser" extensionName="registerBase" pluginName="Form" arguments="{authCode: frontendUser.mailHash}" absolute="true" noCacheHash="true">bestätigen</f:link.action></p>
 
 					<p>Weiters hast du die Möglichkeit, deine hinterlegten Daten entsprechend zu ändern:</p>
-					<p><f:link.action pageUid="10" action="editViaHash" controller="FrontendUser" extensionName="registerBase" pluginName="Form" arguments="{authCode: frontendUser.mailHash}" absolute="true" noCacheHash="true">Daten bearbeiten</f:link.action></p>
+					<p><f:link.action pageUid="131" action="editViaHash" controller="FrontendUser" extensionName="registerBase" pluginName="Form" arguments="{authCode: frontendUser.mailHash}" absolute="true" noCacheHash="true">Daten bearbeiten</f:link.action></p>
 					<br />
-					<p>dein medianet Team</p>
+					<p></p>
 				</td>
 			</tr>
 		</table>

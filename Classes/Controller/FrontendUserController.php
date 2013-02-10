@@ -85,6 +85,10 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 */
 	public function newAction(\TYPO3\RegisterBase\Domain\Model\FrontendUser $newFrontendUser = NULL) {
 		$this->view->assign('newFrontendUser', $newFrontendUser);
+
+		$userGroups = $this->frontendUserGroupRepository->findAll();
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($userGroups);
+		die();
 //		$this->categoryRepository->setDefaultOrderings(array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
 //		$categories = $this->categoryRepository->findAll();
 //		$this->view->assign('categories', $categories);
@@ -200,7 +204,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	public function getEmailView($name) {
 		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
 		$templateRootPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
-		$emailView = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
+		$emailView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
 		$emailView->setTemplatePathAndFilename($templateRootPath . 'Email/' . $name . '.html');
 		$emailView->assign('templateRootPath', $templateRootPath);
 		return $emailView;
@@ -212,8 +216,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	public function sendActivationEmail(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser) {
 		$emailView = $this->getEmailView('Activation');
 		$emailView->assign('frontendUser', $frontendUser);
-
-		$this->sendEmail($frontendUser, $emailView->render(), 'medianet Registrierung bestätigen');
+		$this->sendEmail($frontendUser, $emailView->render(), 'Registrierung bestätigen');
 	}
 
 	/**
@@ -222,7 +225,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	public function sendConfirmationEmail(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser) {
 		$emailView = $this->getEmailView('Confirmation');
 		$emailView->assign('frontendUser', $frontendUser);
-		$this->sendEmail($frontendUser, $emailView->render(), 'medianet Registrierung erfolgreich');
+		$this->sendEmail($frontendUser, $emailView->render(), 'Registrierung erfolgreich');
 	}
 
 	/**

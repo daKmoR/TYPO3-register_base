@@ -49,6 +49,18 @@
 		</table>
 
 		<table>
+			<f:for each="{usergroups}" as="usergroup">
+				<tr>
+					<td width="90" style="text-align: right;">
+						<input id="usergroup{usergroup.uid}" type="checkbox" name="tx_registerbase_form[newFrontendUser][usergroup][{usergroup.uid}]" value="{usergroup.uid}" style="margin: 0;">
+					</td>
+					<td><label for="usergroup{usergroup.uid}" style="margin: 2px 0 0 5px;">{usergroup.name}</label></td>
+				</tr>
+			</f:for>
+		</table>
+
+
+		<table>
 			<f:for each="{categories}" as="category" iteration="categoryIterator">
 				<tr>
 					<td width="90" style="text-align: right;">
