@@ -56,13 +56,13 @@
 			</tr>
 		</table>
 
-		<table>
+		<p class="red">Ich nutze iSi für:</p>
+		<table class="hpcheck">
 			<f:for each="{frontendUserGroups}" as="frontendUserGroup">
 				<tr>
-					<td>
+					<td colspan="2">
 						<input id="frontendUserGroup{frontendUserGroup.uid}" type="checkbox" name="tx_registerbase_form[newFrontendUser][usergroup][{frontendUserGroup.uid}]" value="{frontendUserGroup.uid}">
-					</td>
-					<td><label for="frontendUserGroup{frontendUserGroup.uid}">{frontendUserGroup.title}</label></td>
+					<label for="frontendUserGroup{frontendUserGroup.uid}">{frontendUserGroup.title}</label></td>
 				</tr>
 			</f:for>
 		</table>

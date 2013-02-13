@@ -50,10 +50,11 @@
 			</tr>
 		</table>
 
-		<table>
+		<p class="red">Ich nutze iSi für:</p>
+		<table class="hpcheck">
 			<f:for each="{frontendUserGroups}" as="frontendUserGroup">
 				<tr>
-					<td>
+					<td colspan="2">
 						<input
 							id="usergroup{frontendUserGroup.uid}"
 							type="checkbox"
@@ -61,8 +62,7 @@
 							value="{frontendUserGroup.uid}"
 							{f:if(condition: '{r:userHasUserGroup(user: frontendUser, frontendUserGroup: frontendUserGroup)}', then: 'CHECKED=CHECKED', else: '')}
 						/>
-					</td>
-					<td><label for="usergroup{frontendUserGroup.uid}">{frontendUserGroup.title}</label></td>
+					<label for="usergroup{frontendUserGroup.uid}">{frontendUserGroup.title}</label></td>
 				</tr>
 			</f:for>
 		</table>
