@@ -41,21 +41,21 @@ namespace TYPO3\RegisterBase\ViewHelpers;
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class UserHasCategoryViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class UserHasUserGroupViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
-	 * Check if the object has the category
+	 * Check if the object has the frontendUserGroup
 	 *
 	 * @param object $user The Object to check
-	 * @param  \TYPO3\RegisterBase\Domain\Model\Category $category
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup $frontendUserGroup
 	 * @return boolean
 	 * @author Thomas Allmer <at@delusionworld.com>
 	 */
-	public function render($user, \TYPO3\RegisterBase\Domain\Model\Category $category) {
-		if ($user->hasCategory($category)) {
+	public function render($user, \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup $frontendUserGroup) {
+		if ($user->hasFrontendUserGroup($frontendUserGroup)) {
 			return TRUE;
 		}
 		return FALSE;
-
 	}
+
 }

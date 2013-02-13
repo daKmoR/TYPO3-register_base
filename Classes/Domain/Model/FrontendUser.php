@@ -240,4 +240,12 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 		return $this->newsletterHtmlFormat;
 	}
 
+	/**
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup $frontendUserGroup
+	 * @return boolean
+	 */
+	public function hasFrontendUserGroup(\TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup $frontendUserGroup) {
+		return $this->getUsergroup()->contains($frontendUserGroup);
+	}
+
 }

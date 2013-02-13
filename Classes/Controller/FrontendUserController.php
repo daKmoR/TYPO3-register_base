@@ -86,9 +86,9 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	public function newAction(\TYPO3\RegisterBase\Domain\Model\FrontendUser $newFrontendUser = NULL) {
 		$this->view->assign('newFrontendUser', $newFrontendUser);
 
-		$userGroups = $this->frontendUserGroupRepository->findAll();
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($userGroups);
-		die();
+		$frontendUserGroups = $this->frontendUserGroupRepository->findAll();
+		$this->view->assign('frontendUserGroups', $frontendUserGroups);
+
 //		$this->categoryRepository->setDefaultOrderings(array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
 //		$categories = $this->categoryRepository->findAll();
 //		$this->view->assign('categories', $categories);
@@ -135,11 +135,24 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 * @return void
 	 */
 	public function editAction(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser, $updateMessage = '') {
-		$this->categoryRepository->setDefaultOrderings(array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
-		$categories = $this->categoryRepository->findAll();
-		$this->view->assign('categories', $categories);
+//		$this->categoryRepository->setDefaultOrderings(array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
+//		$categories = $this->categoryRepository->findAll();
+//		$this->view->assign('categories', $categories);
+
+		$frontendUserGroups = $this->frontendUserGroupRepository->findAll();
+
 		$this->view->assign('frontendUser', $frontendUser);
+		$this->view->assign('frontendUserGroups', $frontendUserGroups);
+
 		$this->view->assign('updateMessage', $updateMessage);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function editLoggedInFrontendUserAction() {
+		$frontendUser = $GLOBALS['TSFE']->loginUser > 0 ? $this->frontendUserRepository->findByUid($GLOBALS['TSFE']->loginUser) : NULL;
+		$this->redirect('edit', NULL, NULL, array('frontendUser' => $frontendUser));
 	}
 
 	/**
@@ -237,10 +250,6 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 * @return void
 	 */
 	public function sendEmail($frontendUser, $body, $subject) {
-		$this->settings['fromEmail'] = 'newsletter@medianet.at';
-		$this->settings['fromName'] = 'medianet';
-
-		//$mail = t3lib_div::makeInstance('t3lib_mail_Message');
 		$mail = $this->objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
 		$mail->setFrom(array($this->settings['fromEmail'] => $this->settings['fromName']));
 		$mail->setTo(array($frontendUser->getEmail() => $frontendUser->getName()));

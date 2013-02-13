@@ -51,27 +51,16 @@
 		</table>
 
 		<table>
-			<f:for each="{usergroups}" as="usergroup">
+			<f:for each="{frontendUserGroups}" as="frontendUserGroup">
 				<tr>
-					<td width="90" style="text-align: right;">
-						<input id="usergroup{usergroup.uid}" type="checkbox" name="tx_registerbase_form[newFrontendUser][usergroup][{usergroup.uid}]" value="{usergroup.uid}" style="margin: 0;">
+					<td>
+						<input id="frontendUserGroup{frontendUserGroup.uid}" type="checkbox" name="tx_registerbase_form[newFrontendUser][usergroup][{frontendUserGroup.uid}]" value="{frontendUserGroup.uid}">
 					</td>
-					<td><label for="usergroup{usergroup.uid}" style="margin: 2px 0 0 5px;">{usergroup.name}</label></td>
+					<td><label for="frontendUserGroup{frontendUserGroup.uid}">{frontendUserGroup.title}</label></td>
 				</tr>
 			</f:for>
 		</table>
 
-
-		<table>
-			<f:for each="{categories}" as="category" iteration="categoryIterator">
-				<tr>
-					<td width="90" style="text-align: right;">
-						<input id="category{category.uid}" type="checkbox" name="tx_registerbase_form[newFrontendUser][categories][{category.uid}]" value="{category.uid}" style="margin: 0;">
-					</td>
-					<td><label for="category{category.uid}" style="margin: 2px 0 0 5px;">{category.name}</label></td>
-				</tr>
-			</f:for>
-		</table>
 		<br />
 
 		<f:form.submit value="Jetzt Registrieren" />

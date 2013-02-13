@@ -1,4 +1,4 @@
-{namespace r=TYPO3\RegisterBase\Domain\ViewHelpers}
+{namespace r=TYPO3\RegisterBase\ViewHelpers}
 
 <f:layout name="Default" />
 
@@ -47,19 +47,18 @@
 		</table>
 
 		<table>
-			<f:for each="{categories}" as="category" iteration="categoryIterator">
+			<f:for each="{frontendUserGroups}" as="frontendUserGroup">
 				<tr>
-					<td width="90" style="text-align: right;">
+					<td>
 						<input
-							id="category{category.uid}"
+							id="usergroup{frontendUserGroup.uid}"
 							type="checkbox"
-							name="tx_registerbase_form[frontendUser][categories][{category.uid}]"
-							value="{category.uid}"
-							style="margin: 0;"
-							{f:if(condition: '{r:userHasCategory(user: frontendUser, category: category)}', then: 'CHECKED=CHECKED', else: '')}
+							name="tx_registerbase_edit[frontendUser][usergroup][{frontendUserGroup.uid}]"
+							value="{frontendUserGroup.uid}"
+							{f:if(condition: '{r:userHasUserGroup(user: frontendUser, frontendUserGroup: frontendUserGroup)}', then: 'CHECKED=CHECKED', else: '')}
 						/>
 					</td>
-					<td><label for="category{category.uid}" style="margin: 2px 0 0 5px;">{category.name}</label></td>
+					<td><label for="usergroup{frontendUserGroup.uid}">{frontendUserGroup.title}</label></td>
 				</tr>
 			</f:for>
 		</table>
