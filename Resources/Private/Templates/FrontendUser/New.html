@@ -7,6 +7,14 @@
 	<f:form action="create" name="newFrontendUser" object="{newFrontendUser}">
 		<table>
 			<tr>
+				<td><label for="username">Benutzername:</label></td>
+				<td><f:form.textfield property="username" id="username" /></td>
+			</tr>
+			<tr>
+				<td><label for="password">Passwort:</label></td>
+				<td><f:form.textfield property="password" id="password" /></td>
+			</tr>
+			<tr>
 				<td><label for="firstName">Vorname:</label></td>
 				<td><f:form.textfield property="firstName" id="firstName" /></td>
 			</tr>
@@ -43,10 +51,8 @@
 				<td><f:form.textfield property="telephone" id="telephone" /></td>
 			</tr>
 			<tr>
-				<td colspan="2"><label id="gtclabel" for="gtc">AGB gelesen und akzeptiert*</label></td>
-			</tr>
-			<tr>
-				<td colspan="2" class="agbtext"><f:form.checkbox value="1" name="newFrontendUser[gtc]" id="gtc" /> Ich stimme der Speicherung, Verarbeitung und Übermittlung meiner personenbezogenen Daten aus dieser Bestellung, sowie der Kontaktaufnahme per Telefon, Fax, SMS oder eMail, auch durch Automaten, zu Informations- und Werbezwecken gegen jederzeitigen Widerruf zu. Bezugsabmeldung nur zum Ende des vereinbarten Belieferungszeitraumes bei vorausgehender sechswöchiger Kündigungsfrist. Gerichtsstand ist Wien.</td>
+				<td><f:form.checkbox value="1" name="newFrontendUser[gtc]" id="gtc" /></td>
+				<td><label for="gtc">AGB gelesen und akzeptiert*</label></td>
 			</tr>
 		</table>
 

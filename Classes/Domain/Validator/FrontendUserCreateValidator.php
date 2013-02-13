@@ -34,7 +34,7 @@ namespace TYPO3\RegisterBase\Domain\Validator;
  * @subpackage Validation\Validator
  * @version $Id$
  */
-class FrontendUserValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
+class FrontendUserCreateValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
 
 	/**
 	 * @var \TYPO3\RegisterBase\Domain\Repository\FrontendUserRepository
@@ -43,19 +43,30 @@ class FrontendUserValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
 	protected $frontendUserRepository;
 
 	/**
-	 * Checks if the given email is unique
+	 * Checks if the new frontendUser email and username is available
 	 *
 	 * @param mixed $frontendUser The value that should be validated
 	 * @return boolean TRUE if the value is valid, FALSE if an error occured
 	 */
 	public function isValid($frontendUser) {
 		$foundFrontendUser = $this->frontendUserRepository->findOneByEmail($frontendUser->getEmail());
-		if ($foundFrontendUser === NULL || $frontendUser->getUid() === $foundFrontendUser->getUid()) {
-			return TRUE;
+
+		if ($foundFrontendUser) {
+			$this->result->forProperty('email')->addError(
+				new \TYPO3\CMS\Extbase\Error\Error('Die E-Mail Adresse ist schon in Verwendung.', 1352818549)
+			);
+			return FALSE;
 		}
 
-		$this->addError('Die E-Mail Adresse ist schon in Verwendung', 1352818549);
-		return FALSE;
+		$foundFrontendUser = $this->frontendUserRepository->findOneByUsername($frontendUser->getUsername());
+		if ($foundFrontendUser) {
+			$this->result->forProperty('username')->addError(
+				new \TYPO3\CMS\Extbase\Error\Error('Der Benutzername ist schon in Verwendung.', 1352814549)
+			);
+			return FALSE;
+		}
+
+		return TRUE;
 	}
 
 }

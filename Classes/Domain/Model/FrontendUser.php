@@ -36,7 +36,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 
 	/**
 	 * @var string
-	 * @validate NotEmpty
+	 * @validate notEmpty
 	 * @validate EmailAddress
 	 */
 	protected $email;
@@ -47,9 +47,22 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	protected $disable;
 
 	/**
+	 * @var string
+	 * @validate notEmpty
+	 */
+	protected $username;
+
+	/**
+	 * @var string
+	 * @validate notEmpty
+	 */
+	protected $password;
+
+	/**
 	 * General Terms and Conditions
+	 *
 	 * @var boolean
-	 * @validate NotEmpty
+	 * @validate notEmpty
 	 */
 	protected $gtc;
 

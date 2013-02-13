@@ -96,15 +96,19 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 
 	/**
 	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $newFrontendUser
+	 * @validate $newFrontendUser \TYPO3\RegisterBase\Domain\Validator\FrontendUserCreateValidator
 	 * @return void
 	 */
 	public function createAction(\TYPO3\RegisterBase\Domain\Model\FrontendUser $newFrontendUser) {
 		$newFrontendUser->disable();
 		$newFrontendUser->setName();
-		$newFrontendUser->setUsername();
+
 		$newFrontendUser->setNewsletter(TRUE);
 		$newFrontendUser->setNewsletterHtmlFormat(TRUE);
 
+		if ($newFrontendUser->getUsername() === '') {
+			$newFrontendUser->setUsername();
+		}
 		if ($newFrontendUser->getPassword() === '') {
 			$tmpPassword = $this->hashService->generateHmac(\TYPO3\CMS\Core\Utility\GeneralUtility::generateRandomBytes(40));
 			$newFrontendUser->setPassword($tmpPassword);
@@ -151,7 +155,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 * @return void
 	 */
 	public function editLoggedInFrontendUserAction() {
-		$frontendUser = $GLOBALS['TSFE']->loginUser > 0 ? $this->frontendUserRepository->findByUid($GLOBALS['TSFE']->loginUser) : NULL;
+		$frontendUser = $GLOBALS['TSFE']->loginUser > 0 ? $this->frontendUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']) : NULL;
 		$this->redirect('edit', NULL, NULL, array('frontendUser' => $frontendUser));
 	}
 
@@ -161,7 +165,6 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 */
 	public function updateAction(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser) {
 		$frontendUser->setName();
-		$frontendUser->setUsername();
 
 		$this->frontendUserRepository->update($frontendUser);
 		$this->objectManager->get('Tx_Extbase_Persistence_Manager')->persistAll();
