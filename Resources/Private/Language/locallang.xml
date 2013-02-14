@@ -6,8 +6,17 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="error.email.1242859509">E-Mail ist entweder ungültig oder wird bereits verwendet.</label>
-			<label index="error.gtc.1242859509">Die AGB müssen akzeptiert werden.</label>
+			<label index="newFrontendUser.email">E-Mail</label>
+			<label index="newFrontendUser.username">Benutzername</label>
+			<label index="newFrontendUser.password">Passwort</label>
+
+
+			<label index="error.1221560718">Das Feld muss ausgefüllt werden.</label>
+			<label index="error.1360850597">Der Benutzername ist bereits vergeben.</label>
+			<label index="error.1221559976">Die E-Mail muss gültig sein.</label>
+			<label index="error.1360850585">Die E-Mail ist bereits vergeben.</label>
+
+
 			<label index="account.notFound">Der Benutzer wurde nicht gefunden.</label>
 			<label index="account.isActive">Der Benutzer ist bereits aktiv.</label>
 			<label index="account.activated">Der Benutzer wurde aktiviert.</label>

@@ -50,23 +50,24 @@ class FrontendUserCreateValidator extends \TYPO3\CMS\Extbase\Validation\Validato
 	 */
 	public function isValid($frontendUser) {
 		$foundFrontendUser = $this->frontendUserRepository->findOneByEmail($frontendUser->getEmail());
+		$result = TRUE;
 
 		if ($foundFrontendUser) {
 			$this->result->forProperty('email')->addError(
-				new \TYPO3\CMS\Extbase\Error\Error('Die E-Mail Adresse ist schon in Verwendung.', 1352818549)
+				new \TYPO3\CMS\Extbase\Error\Error('E-Mail is already taken.', 1360850585)
 			);
-			return FALSE;
+			$result = FALSE;
 		}
 
 		$foundFrontendUser = $this->frontendUserRepository->findOneByUsername($frontendUser->getUsername());
 		if ($foundFrontendUser) {
 			$this->result->forProperty('username')->addError(
-				new \TYPO3\CMS\Extbase\Error\Error('Der Benutzername ist schon in Verwendung.', 1352814549)
+				new \TYPO3\CMS\Extbase\Error\Error('Username is already taken.', 1360850597)
 			);
-			return FALSE;
+			$result = FALSE;
 		}
 
-		return TRUE;
+		return $result;
 	}
 
 }

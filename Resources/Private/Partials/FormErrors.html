@@ -1,18 +1,33 @@
-<f:form.errors>
-	<div class="error">
-		<f:if condition="{error.propertyName}">
-			<ul class="error_{error.propertyName}">
-				<f:for each="{error.errors}" as="errorDetail">
-					<f:if condition="{f:translate(key:'error.{errorDetail.propertyName}.{errorDetail.code}')}">
+<f:form.validationResults for="{for}">
+	<ul class="errors">
+		<f:for each="{validationResults.subResults}" as="propertyResult" key="propertyName">
+
+			<f:if condition="{propertyResult.errors}">
+				<li>
+					<f:if condition="{f:translate(key:'{for}.{propertyName}')}">
 						<f:then>
-							<li><f:translate key="error.{errorDetail.propertyName}.{errorDetail.code}" /></li>
+							<f:translate key="{for}.{propertyName}" />:
 						</f:then>
 						<f:else>
-							<li>{errorDetail.message} error.{errorDetail.propertyName}.{errorDetail.code}</li>
+							{for}.{propertyName}:
 						</f:else>
 					</f:if>
-				</f:for>
-			</ul>
-		</f:if>
-	</div>
-</f:form.errors>
+
+					<ul class="errors_{for}_{propertyName}">
+						<f:for each="{propertyResult.errors}" as="errorDetail">
+							<f:if condition="{f:translate(key:'error.{errorDetail.code}')}">
+								<f:then>
+									<li><f:translate key="error.{errorDetail.code}" /></li>
+								</f:then>
+								<f:else>
+									<li>{errorDetail.message} error.{errorDetail.code}</li>
+								</f:else>
+							</f:if>
+						</f:for>
+					</ul>
+				</li>
+			</f:if>
+
+		</f:for>
+	</ul>
+</f:form.validationResults>

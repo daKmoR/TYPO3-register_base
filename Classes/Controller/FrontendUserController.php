@@ -113,7 +113,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 			$tmpPassword = $this->hashService->generateHmac(\TYPO3\CMS\Core\Utility\GeneralUtility::generateRandomBytes(40));
 			$newFrontendUser->setPassword($tmpPassword);
 		}
-		$mailHash = $this->hashService->generateHmac($newFrontendUser->getPassword());
+		$mailHash = $this->hashService->generateHmac($newFrontendUser->getUsername() . $newFrontendUser->getPassword());
 
 		$newFrontendUser->setMailHash($mailHash);
 
