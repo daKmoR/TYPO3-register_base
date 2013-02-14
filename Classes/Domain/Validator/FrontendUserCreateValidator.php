@@ -52,7 +52,7 @@ class FrontendUserCreateValidator extends \TYPO3\CMS\Extbase\Validation\Validato
 		$foundFrontendUser = $this->frontendUserRepository->findOneByEmail($frontendUser->getEmail());
 		$result = TRUE;
 
-		if ($foundFrontendUser) {
+		if ($foundFrontendUser && $foundFrontendUser->getUid() !== $frontendUser->getUid()) {
 			$this->result->forProperty('email')->addError(
 				new \TYPO3\CMS\Extbase\Error\Error('E-Mail is already taken.', 1360850585)
 			);
@@ -60,7 +60,7 @@ class FrontendUserCreateValidator extends \TYPO3\CMS\Extbase\Validation\Validato
 		}
 
 		$foundFrontendUser = $this->frontendUserRepository->findOneByUsername($frontendUser->getUsername());
-		if ($foundFrontendUser) {
+		if ($foundFrontendUser && $foundFrontendUser->getUid() !== $frontendUser->getUid()) {
 			$this->result->forProperty('username')->addError(
 				new \TYPO3\CMS\Extbase\Error\Error('Username is already taken.', 1360850597)
 			);

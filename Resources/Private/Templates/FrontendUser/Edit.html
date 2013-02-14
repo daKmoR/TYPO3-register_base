@@ -12,6 +12,7 @@
 				<td><label for="username">Benutzername:</label></td>
 				<td><f:form.textfield property="username" id="username" /></td>
 			</tr>
+			<f:render partial="FormErrorFor" arguments="{for: 'frontendUser.username'}" />
 			<tr>
 				<td><label for="firstName">Vorname:</label></td>
 				<td><f:form.textfield property="firstName" id="firstName" /></td>
@@ -24,6 +25,7 @@
 				<td><label for="email">E-Mail*:</label></td>
 				<td><f:form.textfield property="email" id="email" /></td>
 			</tr>
+			<f:render partial="FormErrorFor" arguments="{for: 'frontendUser.email'}" />
 			<tr>
 				<td><label for="company">Firmenname:</label></td>
 				<td><f:form.textfield property="company" id="company" /></td>

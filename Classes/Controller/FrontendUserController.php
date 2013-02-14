@@ -161,6 +161,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 
 	/**
 	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser
+	 * @validate $frontendUser \TYPO3\RegisterBase\Domain\Validator\FrontendUserCreateValidator
 	 * @return void
 	 */
 	public function updateAction(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser) {

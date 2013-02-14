@@ -2,18 +2,20 @@
 	<td colspan="2">
 
 <f:form.validationResults for="{for}">
-	<ul class="errors">
-		<f:for each="{validationResults.errors}" as="errorDetail">
-			<f:if condition="{f:translate(key:'error.{errorDetail.code}')}">
-				<f:then>
-					<li><f:translate key="error.{errorDetail.code}" /></li>
-				</f:then>
-				<f:else>
-					<li>{errorDetail.message} error.{errorDetail.code}</li>
-				</f:else>
-			</f:if>
-		</f:for>
-	</ul>
+	<f:if condition="{validationResults.errors}">
+		<ul class="errors">
+			<f:for each="{validationResults.errors}" as="errorDetail">
+				<f:if condition="{f:translate(key:'error.{errorDetail.code}')}">
+					<f:then>
+						<li><f:translate key="error.{errorDetail.code}" /></li>
+					</f:then>
+					<f:else>
+						<li>{errorDetail.message} error.{errorDetail.code}</li>
+					</f:else>
+				</f:if>
+			</f:for>
+		</ul>
+	</f:if>
 </f:form.validationResults>
 
 	</td>
