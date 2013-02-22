@@ -7,7 +7,7 @@
 			<f:for each="{validationResults.errors}" as="errorDetail">
 				<f:if condition="{f:translate(key:'error.{errorDetail.code}')}">
 					<f:then>
-						<li><f:translate key="error.{errorDetail.code}" /></li>
+						<li><f:translate key="error.{errorDetail.code}" arguments="{errorDetail.arguments}" /></li>
 					</f:then>
 					<f:else>
 						<li>{errorDetail.message} error.{errorDetail.code}</li>
