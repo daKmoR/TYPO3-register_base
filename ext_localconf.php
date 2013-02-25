@@ -5,7 +5,7 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
 	'TYPO3.' . $_EXTKEY,
-	'register: Form',
+	'Form',
 	array(
 		'FrontendUser' => 'new, create, edit, editViaHash, editLoggedInFrontendUser, update, delete, deleteViaHash, confirm',
 	),
@@ -17,7 +17,7 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
 	'TYPO3.' . $_EXTKEY,
-	'register: Edit logged in FrontendUser',
+	'Edit',
 	array(
 		'FrontendUser' => 'editLoggedInFrontendUser, new, create, edit, editViaHash, update, delete, deleteViaHash, confirm',
 	),
