@@ -7,11 +7,11 @@ if (!defined('TYPO3_MODE')) {
 	'TYPO3.' . $_EXTKEY,
 	'Form',
 	array(
-		'FrontendUser' => 'new, create, edit, editViaHash, update, delete, deleteViaHash, confirm',
+		'FrontendUser' => 'new, create, edit, editViaHash, editLoggedInFrontendUser, update, delete, deleteViaHash, confirm',
 	),
 	// non-cacheable actions
 	array(
-		'FrontendUser' => 'create, update, delete, confirm',
+		'FrontendUser' => 'new, create, edit, editViaHash, editLoggedInFrontendUser, update, delete, deleteViaHash, confirm',
 	)
 );
 
@@ -19,13 +19,12 @@ if (!defined('TYPO3_MODE')) {
 	'TYPO3.' . $_EXTKEY,
 	'Edit',
 	array(
-		'FrontendUser' => 'editLoggedInFrontendUser, edit, editViaHash, update, delete, deleteViaHash, confirm',
+		'FrontendUser' => 'new, create, edit, editViaHash, editLoggedInFrontendUser, update, delete, deleteViaHash, confirm',
 	),
 	// non-cacheable actions
 	array(
-		'FrontendUser' => 'update, delete, confirm',
+		'FrontendUser' => 'new, create, edit, editViaHash, editLoggedInFrontendUser, update, delete, deleteViaHash, confirm',
 	)
 );
-
 
 ?>
