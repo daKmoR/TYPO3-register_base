@@ -43,6 +43,12 @@ class FrontendUserCreateValidator extends \TYPO3\CMS\Extbase\Validation\Validato
 	protected $frontendUserRepository;
 
 	/**
+	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
+	 * @inject
+	 */
+	protected $configurationManager;
+
+	/**
 	 * Checks if the new frontendUser email and username is available
 	 *
 	 * @param mixed $frontendUser The value that should be validated
@@ -65,6 +71,17 @@ class FrontendUserCreateValidator extends \TYPO3\CMS\Extbase\Validation\Validato
 				new \TYPO3\CMS\Extbase\Error\Error('Username is already taken.', 1360850597)
 			);
 			$result = FALSE;
+		}
+
+		$settings = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
+		if ($settings['forceAtLeastOneUserGroup']) {
+			$userGroups = $frontendUser->getUsergroup();
+			if (count($userGroups) <= 0) {
+				$this->result->forProperty('usergroup')->addError(
+					new \TYPO3\CMS\Extbase\Error\Error('You have to choose at least ONE usergroup.', 1362149169)
+				);
+				$result = FALSE;
+			}
 		}
 
 		return $result;

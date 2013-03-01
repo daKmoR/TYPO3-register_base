@@ -8,11 +8,11 @@ plugin.tx_registerbase {
 		storagePid =
 	}
 	features {
-		# uncomment the following line to enable the new Property Mapper.
 		rewrittenPropertyMapper = 1
 	}
 	settings {
 		fromEmail = office@company.com
 		fromName = Office Company
+		forceAtLeastOneUserGroup = 0
 	}
 }
