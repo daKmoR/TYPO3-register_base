@@ -59,6 +59,17 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	protected $hashService;
 
 	/**
+	 * @var \TYPO3\CMS\Core\Mail\MailMessage
+	 * @inject
+	 */
+	protected $mailMessage;
+
+	/**
+	 * @var array
+	 */
+	protected $embedCache;
+
+	/**
 	 *
 	 */
 	public function initializeAction() {
@@ -120,7 +131,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		$this->frontendUserRepository->add($newFrontendUser);
 
 		$this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
-		$this->sendActivationEmail($newFrontendUser);
+		$this->sendEmailsFor($newFrontendUser, 'Activation');
 	}
 
 	/**
@@ -230,37 +241,51 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 
 	/**
 	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser
+	 * @param $for
 	 */
-	public function sendActivationEmail(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser) {
-		$emailView = $this->getEmailView('Activation');
-		$emailView->assign('frontendUser', $frontendUser);
-		$this->sendEmail($frontendUser, $emailView->render(), 'Registrierung bestätigen');
+	public function sendEmailsFor(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser, $for) {
+		if (is_array($this->settings[$for])) {
+			foreach($this->settings[$for] as $template => $mailSettings) {
+				$emailView = $this->getEmailView($template);
+				$emailView->assign('frontendUser', $frontendUser);
+				$body = $emailView->render();
+
+				foreach(array('fromEmail', 'fromName', 'toEmail', 'toName') as $property) {
+					if (strpos($mailSettings[$property], 'Function:') !== FALSE) {
+						$function = substr($mailSettings[$property], 9);
+						$mailSettings[$property] = $frontendUser->$function();
+					}
+				}
+
+				var_dump($mailSettings);
+
+				$this->mailMessage->setFrom(array($mailSettings['fromEmail'] => $mailSettings['fromName']));
+				$this->mailMessage->setTo(array($mailSettings['toEmail'] => $mailSettings['toName']));
+				$this->mailMessage->setSubject(sprintf($mailSettings['subject'], $frontendUser->getName(), $frontendUser->getEmail()));
+
+				$body = preg_replace_callback('/(<img [^>]*src=["|\'])([^"|\']+)/i', array(&$this, 'imageEmbed'), $body);
+				$this->mailMessage->setBody($body, 'text/html');
+				$this->mailMessage->send();
+			}
+		}
+		die('a');
 	}
 
 	/**
-	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser
+	 * @param $match
+	 * @return string
 	 */
-	public function sendConfirmationEmail(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser) {
-		$emailView = $this->getEmailView('Confirmation');
-		$emailView->assign('frontendUser', $frontendUser);
-		$this->sendEmail($frontendUser, $emailView->render(), 'Registrierung erfolgreich');
-	}
+	private function imageEmbed($match) {
+		if ($this->embedCache === NULL) {
+			$this->embedCache = array();
+		}
+		$key = $match[2];
+		if (array_key_exists($key, $this->embedCache)) {
+			return $match[1] . $this->embedCache[$key];
+		}
+		$this->embedCache[$key] = $this->mailMessage->embed(\Swift_Image::fromPath($match[2]));
 
-	/**
-	 * sends all mails configured in the setting sendEmail
-	 *
-	 * @param $frontendUser
-	 * @param $body string
-	 * @param $subject
-	 * @return void
-	 */
-	public function sendEmail($frontendUser, $body, $subject) {
-		$mail = $this->objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
-		$mail->setFrom(array($this->settings['fromEmail'] => $this->settings['fromName']));
-		$mail->setTo(array($frontendUser->getEmail() => $frontendUser->getName()));
-		$mail->setSubject($subject);
-		$mail->setBody($body, 'text/html');
-		$mail->send();
+		return $match[1] . $this->embedCache[$key];
 	}
 
 }

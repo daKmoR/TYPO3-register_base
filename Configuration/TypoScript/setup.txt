@@ -11,9 +11,16 @@ plugin.tx_registerbase {
 		rewrittenPropertyMapper = 1
 	}
 	settings {
-		fromEmail = office@company.com
-		fromName = Office Company
 		forceAtLeastOneUserGroup = 0
 		baseUrl = {$baseUrl}
+		Activation {
+			Activation {
+				subject = Registrierung bestätigen
+				fromEmail = office@company.com
+				fromName = Office Company
+				toEmail = Function:getEmail
+				toName = Function:getName
+			}
+		}
 	}
 }
