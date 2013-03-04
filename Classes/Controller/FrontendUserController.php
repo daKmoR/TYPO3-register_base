@@ -224,6 +224,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		$emailView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
 		$emailView->setTemplatePathAndFilename($templateRootPath . 'Email/' . $name . '.html');
 		$emailView->assign('templateRootPath', $templateRootPath);
+		$emailView->assign('settings', $this->settings);
 		return $emailView;
 	}
 

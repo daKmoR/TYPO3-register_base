@@ -1,26 +1,80 @@
+{namespace css=TYPO3\CssToStyle\ViewHelpers}
+
+<css:cssToStyle cssFile="{templateRootPath}Email/Global.css" debug="TRUE">
+
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Registrierung bestätigen</title>
+	<base href="{settings.baseUrl}">
 </head>
 <body>
 	<style type="text/css">
-		a:hover { color: #ff8418 !important; text-decoration: underline; }
-		a:link { color: #475678; text-decoration: underline; }
-		a:visited {color: #475678; text-decoration: underline; }
+		a:hover { color: #333 !important; text-decoration: underline; }
+		a:link { color: #333; text-decoration: underline; }
+		a:visited {color: #333; text-decoration: underline; }
 	</style>
 	<center>
 		<table cellspacing="0" cellpadding="0" border="0" id="outerTable">
 			<tr>
-				<td id="content">
-					<h1>Hallo {frontendUser.name}!</h1>
-					<p>Du hast dich als {frontendUser.username} angemeldet. Du müsstest jetzt bitte noch deine E-Mail bestätigen:</p>
-					<p><f:link.action pageUid="132" action="confirm" controller="FrontendUser" extensionName="registerBase" pluginName="Form" arguments="{authCode: frontendUser.mailHash}" absolute="true" noCacheHash="true">bestätigen</f:link.action></p>
-
-					<p>iSi GmbH</p>
+				<td colspan="3" id="header">
+					<a href="http://www.isi.com">
+						<img id="headerImage" alt="header" src="typo3conf/ext/isi_recipes/Resources/Public/Css/Images/header.gif" />
+					</a>
 				</td>
+			</tr>
+			<tr>
+				<td><img width="30" alt="clear" src="typo3conf/ext/isi_recipes/Resources/Public/Css/Images/clear.gif" /></td>
+				<td id="content">
+					<h1>Vielen Dank für Ihr Interesse an der <br /> iSi Rezeptdatenbank!</h1>
+					<p>Um Ihre Registrierung abzuschließen, fehlt nur noch ein Klick auf folgenden Link:</p>
+					<p style="width: 649px;">
+						<f:link.action pageUid="132" action="confirm" controller="FrontendUser" extensionName="registerBase" pluginName="Form" arguments="{authCode: frontendUser.mailHash}" absolute="true" noCacheHash="true">
+							<css:breakOnCharacter>
+								<f:uri.action pageUid="132" action="confirm" controller="FrontendUser" extensionName="registerBase" pluginName="Form" arguments="{authCode: frontendUser.mailHash}" absolute="true" noCacheHash="true"></f:uri.action>
+							</css:breakOnCharacter>
+						</f:link.action>
+					</p>
+					<br /><br />
+
+					<p>Ihr iSi-Team</p>
+				</td>
+				<td><img width="30" alt="clear" src="typo3conf/ext/isi_recipes/Resources/Public/Css/Images/clear.gif" /></td>
+			</tr>
+			<tr class="footerColor">
+				<td colspan="3"><img width="30" alt="clear" src="typo3conf/ext/isi_recipes/Resources/Public/Css/Images/clear.gif" /></td>
+			</tr>
+			<tr id="outerFooter">
+				<td><img width="30" alt="clear" src="typo3conf/ext/isi_recipes/Resources/Public/Css/Images/clear.gif" /></td>
+				<td id="footer">
+					<table>
+						<tr>
+							<td class="col1">
+								<a href="http://www.isi.com/kulinarik/haushalt/ueber-isi/kontakt/">Kontakt</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+								<a href="http://www.isi.com/kulinarik/haushalt/agb/">AGB</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+								<a href="http://www.isi.com/kulinarik/haushalt/impressum/">Impressum</a>
+							</td>
+							<td class="col2">
+								Unsere Serviceline: <span class="red">+43-1-25099-0</span>
+							</td>
+							<td class="col3">
+								<a href="https://www.facebook.com/isi.kulinarik">
+									<img alt="facebook" src="typo3conf/ext/site_default/Resources/Public/Css/Images/facebook_small.png" />
+								</a>
+								<a href="http://www.youtube.com/user/isivienna">
+									<img alt="youtube" src="typo3conf/ext/site_default/Resources/Public/Css/Images/youtube_small.png" />
+								</a>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td><img width="30" alt="clear" src="typo3conf/ext/isi_recipes/Resources/Public/Css/Images/clear.gif" /></td>
+			</tr>
+			<tr class="footerColor">
+				<td colspan="3"><img width="30" alt="clear" src="typo3conf/ext/isi_recipes/Resources/Public/Css/Images/clear.gif" /></td>
 			</tr>
 		</table>
 	</center>
 </body>
 </html>
+
+</css:cssToStyle>

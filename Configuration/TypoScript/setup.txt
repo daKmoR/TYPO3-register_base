@@ -14,5 +14,6 @@ plugin.tx_registerbase {
 		fromEmail = office@company.com
 		fromName = Office Company
 		forceAtLeastOneUserGroup = 0
+		baseUrl = {$baseUrl}
 	}
 }
