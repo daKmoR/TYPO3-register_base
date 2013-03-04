@@ -257,8 +257,6 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 					}
 				}
 
-				var_dump($mailSettings);
-
 				$this->mailMessage->setFrom(array($mailSettings['fromEmail'] => $mailSettings['fromName']));
 				$this->mailMessage->setTo(array($mailSettings['toEmail'] => $mailSettings['toName']));
 				$this->mailMessage->setSubject(sprintf($mailSettings['subject'], $frontendUser->getName(), $frontendUser->getEmail()));
@@ -268,7 +266,6 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 				$this->mailMessage->send();
 			}
 		}
-		die('a');
 	}
 
 	/**
