@@ -1,9 +1,23 @@
 config.tx_extbase {
 	persistence {
 		classes {
+			TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup {
+				subclasses {
+					TYPO3\RegisterBase\Domain\Model\FrontendUserGroup = TYPO3\RegisterBase\Domain\Model\FrontendUserGroup
+				}
+			}
 			TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 				subclasses {
-					TYPO3_RegisterBase_Domain_Model_FrontendUser = TYPO3_RegisterBase_Domain_Model_FrontendUser
+					TYPO3\RegisterBase\Domain\Model\FrontendUser = TYPO3\RegisterBase\Domain\Model\FrontendUser
+				}
+			}
+			TYPO3\RegisterBase\Domain\Model\FrontendUserGroup {
+				mapping {
+					tableName = fe_groups
+					#recordType = Tx_RegisterBase_FrontendUserGroup
+					columns {
+						show_in_frontend.mapOnProperty = showInFrontend
+					}
 				}
 			}
 			TYPO3\RegisterBase\Domain\Model\FrontendUser {

@@ -17,6 +17,9 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Register using extbase');
 
+// allows to use the following marker in the newsletter ###USER_mailhash###
+$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['direct_mail']['addRecipFields'] = 'mailhash';
+
 // fe_users modified
 $tempCols = array(
 	'gtc' => array(
@@ -28,14 +31,21 @@ $tempCols = array(
 	)
 );
 
-t3lib_div::loadTCA('fe_users');
-t3lib_extMgm::addTCAcolumns('fe_users',$tempCols);
-$TCA['fe_users']['feInterface']['fe_admin_fieldList'].=',gtc';
-t3lib_extMgm::addToAllTCATypes('fe_users','gtc');
+// \TYPO3\CMS\Core\Utility\GeneralUtility::loadTCA('fe_users');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tempCols);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'gtc');
 
-// allows to use the following marker in the newsletter ###USER_mailhash###
-$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['direct_mail']['addRecipFields'] = 'mailhash';
-
+$tempCols = array(
+	'show_in_frontend' => array(
+		'exclude' => 0,
+		'label' => 'Show in Frontend',
+		'config' => array(
+			'type' => 'check',
+		),
+	),
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_groups', $tempCols);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_groups', 'show_in_frontend');
 
 // category
 //$TCA['sys_dmail_category']['interface'] = array(

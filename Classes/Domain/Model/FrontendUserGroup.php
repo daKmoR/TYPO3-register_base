@@ -1,5 +1,5 @@
 <?php
-namespace TYPO3\RegisterBase\Domain\Repository;
+namespace TYPO3\RegisterBase\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -32,25 +32,25 @@ namespace TYPO3\RegisterBase\Domain\Repository;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class FrontendUserRepository extends \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository {
+class FrontendUserGroup extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup {
 
 	/**
-	 * @param $mailHash
-	 * @return \TYPO3\RegisterBase\Domain\Model\FrontendUser
+	 * @var integer
 	 */
-	public function findByMailHash($mailHash) {
-		$query = $this->createQuery();
-		$query->getQuerySettings()->setRespectEnableFields(FALSE);
+	protected $showInFrontend;
 
-		$user = $query
-			->matching(
-				$query->equals('mailhash', $mailHash)
-			)
-			->setLimit(1)
-			->execute()
-			->getFirst();
+	/**
+	 * @param int $showInFrontend
+	 */
+	public function setShowInFrontend($showInFrontend) {
+		$this->showInFrontend = $showInFrontend;
+	}
 
-		return $user;
+	/**
+	 * @return int
+	 */
+	public function getShowInFrontend() {
+		return $this->showInFrontend;
 	}
 
 }

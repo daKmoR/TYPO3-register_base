@@ -32,25 +32,6 @@ namespace TYPO3\RegisterBase\Domain\Repository;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class FrontendUserRepository extends \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository {
-
-	/**
-	 * @param $mailHash
-	 * @return \TYPO3\RegisterBase\Domain\Model\FrontendUser
-	 */
-	public function findByMailHash($mailHash) {
-		$query = $this->createQuery();
-		$query->getQuerySettings()->setRespectEnableFields(FALSE);
-
-		$user = $query
-			->matching(
-				$query->equals('mailhash', $mailHash)
-			)
-			->setLimit(1)
-			->execute()
-			->getFirst();
-
-		return $user;
-	}
+class FrontendUserGroupRepository extends \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserGroupRepository {
 
 }

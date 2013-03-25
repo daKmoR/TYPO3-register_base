@@ -47,7 +47,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	protected $categoryRepository;
 
 	/**
-	 * @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserGroupRepository
+	 * @var \TYPO3\RegisterBase\Domain\Repository\FrontendUserGroupRepository
 	 * @inject
 	 */
 	protected $frontendUserGroupRepository;
@@ -86,7 +86,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 
 		$this->view->assign('newFrontendUser', $newFrontendUser);
 
-		$frontendUserGroups = $this->frontendUserGroupRepository->findAll();
+		$frontendUserGroups = $this->frontendUserGroupRepository->findByShowInFrontend(1);
 		$this->view->assign('frontendUserGroups', $frontendUserGroups);
 
 //		$this->categoryRepository->setDefaultOrderings(array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
