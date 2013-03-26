@@ -12,6 +12,7 @@
 
 
 			<label index="error.1221560718">Das Feld muss ausgefüllt werden.</label>
+			<label index="error.1221565130">Das Feld muss ausgefüllt werden.</label>
 			<label index="error.1360850597">Der Benutzername ist bereits vergeben.</label>
 			<label index="error.1221559976">Die E-Mail muss gültig sein.</label>
 			<label index="error.1360850585">Die E-Mail ist bereits vergeben.</label>

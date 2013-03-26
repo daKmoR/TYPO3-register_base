@@ -56,9 +56,10 @@
 				<td><f:form.textfield property="telephone" id="telephone" /></td>
 			</tr>
 			<tr>
-				<td><f:form.checkbox value="1" name="newFrontendUser[gtc]" id="gtc" /></td>
+				<td><f:form.checkbox property="gtc" id="gtc" value="1" /></td>
 				<td><label for="gtc">AGB gelesen und akzeptiert*</label></td>
 			</tr>
+			<f:render partial="FormErrorFor" arguments="{for: 'newFrontendUser.gtc'}" />
 		</table>
 
 		<p class="red">Ich nutze iSi für:</p>

@@ -70,31 +70,20 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	protected $embedCache;
 
 	/**
-	 *
-	 */
-	public function initializeAction() {
-		if (array_key_exists($this->arguments, 'newFrontendUser')) {
-			$mappingConfiguration = $this->arguments['newFrontendUser']->getPropertyMappingConfiguration();
-			for ($i = 0; $i < 100; $i++) {
-				$mappingConfiguration->allowCreationForSubProperty('categories.' . $i);
-				$mappingConfiguration->allowModificationForSubProperty('categories.' . $i);
-			}
-		}
-		if (array_key_exists($this->arguments, 'frontendUser')) {
-			$mappingConfiguration = $this->arguments['frontendUser']->getPropertyMappingConfiguration();
-			for ($i = 0; $i < 100; $i++) {
-				$mappingConfiguration->allowCreationForSubProperty('categories.' . $i);
-				$mappingConfiguration->allowModificationForSubProperty('categories.' . $i);
-			}
-		}
-	}
-
-	/**
 	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $newFrontendUser
 	 * @dontvalidate $newFrontendUser
 	 * @return void
 	 */
 	public function newAction(\TYPO3\RegisterBase\Domain\Model\FrontendUser $newFrontendUser = NULL) {
+		if ($newFrontendUser === NULL) {
+			$newFrontendUser = $this->objectManager->create('TYPO3\RegisterBase\Domain\Model\FrontendUser');
+		}
+
+		$form = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_registerbase_form');
+		if (array_key_exists('gtc', $form['newFrontendUser']) && $form['newFrontendUser']['gtc'] === '1') {
+			$newFrontendUser->setGtc(true);
+		}
+
 		$this->view->assign('newFrontendUser', $newFrontendUser);
 
 		$frontendUserGroups = $this->frontendUserGroupRepository->findAll();

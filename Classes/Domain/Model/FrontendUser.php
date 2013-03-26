@@ -64,7 +64,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	 * @var boolean
 	 * @validate notEmpty
 	 */
-	protected $gtc;
+	protected $gtc = FALSE;
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Tx_RegisterBase_Domain_Model_Category>
