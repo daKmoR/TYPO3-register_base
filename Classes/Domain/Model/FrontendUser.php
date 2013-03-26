@@ -62,7 +62,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	 * General Terms and Conditions
 	 *
 	 * @var boolean
-	 * @validate notEmpty
+	 * @validate RegularExpression(regularExpression=/1/)
 	 */
 	protected $gtc = FALSE;
 
