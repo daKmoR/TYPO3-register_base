@@ -62,7 +62,7 @@
 							type="checkbox"
 							name="tx_registerbase_edit[frontendUser][usergroup][{frontendUserGroup.uid}]"
 							value="{frontendUserGroup.uid}"
-							{f:if(condition: '{r:userHasUserGroup(user: frontendUser, frontendUserGroup: frontendUserGroup)}', then: 'CHECKED=CHECKED', else: '')}
+							{f:if(condition: '{r:userHasUserGroup(user: frontendUser, frontendUserGroup: frontendUserGroup)}', then: 'checked="checked"', else: '')}
 						/>
 					<label for="usergroup{frontendUserGroup.uid}">{frontendUserGroup.title}</label></td>
 				</tr>

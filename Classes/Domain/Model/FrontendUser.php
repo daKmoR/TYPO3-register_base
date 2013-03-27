@@ -91,6 +91,11 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	protected $newsletterHtmlFormat;
 
 	/**
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\RegisterBase\Domain\Model\FrontendUserGroup>
+	 */
+	protected $usergroup;
+
+	/**
 	 * Constructs a new Front-End User
 	 */
 	public function __construct($username = '', $password = '') {
@@ -254,10 +259,10 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	}
 
 	/**
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup $frontendUserGroup
+	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUserGroup $frontendUserGroup
 	 * @return boolean
 	 */
-	public function hasFrontendUserGroup(\TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup $frontendUserGroup) {
+	public function hasFrontendUserGroup(\TYPO3\RegisterBase\Domain\Model\FrontendUserGroup $frontendUserGroup) {
 		return $this->getUsergroup()->contains($frontendUserGroup);
 	}
 

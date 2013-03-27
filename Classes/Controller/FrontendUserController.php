@@ -143,7 +143,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 //		$categories = $this->categoryRepository->findAll();
 //		$this->view->assign('categories', $categories);
 
-		$frontendUserGroups = $this->frontendUserGroupRepository->findAll();
+		$frontendUserGroups = $this->frontendUserGroupRepository->findByShowInFrontend(1);
 
 		$this->view->assign('frontendUser', $frontendUser);
 		$this->view->assign('frontendUserGroups', $frontendUserGroups);

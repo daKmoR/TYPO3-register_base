@@ -4,7 +4,7 @@ namespace TYPO3\RegisterBase\ViewHelpers;
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2012 Thomas Allmer <at@delusionworld.com>
+*  (c) 2013 Thomas Allmer <d4kmor@gmail.com>
 *
 *  All rights reserved
 *
@@ -26,13 +26,13 @@ namespace TYPO3\RegisterBase\ViewHelpers;
 ***************************************************************/
 
 /**
- * This ViewHelper checks if the given user has the category
+ * This ViewHelper checks if a user has a certain frontendUserGroup
  *
  * = Examples =
  *
- * <code title="Show only if of type Tx_Assets_Domain_Model_Youtube">
- * <f:if condition="{r:userHasCategory(user: frontendUser, category: category)}">
- *   show only user has the category
+ * <code title="Show only if of user has the frontendUserGroup">
+ * <f:if condition="{r:userHasUserGroup(user: frontendUser, frontendUserGroup: frontendUserGroup)}">
+ *   show only user has the frontendUserGroup
  * </f:if>
  * </code>
  * <output>
@@ -47,11 +47,10 @@ class UserHasUserGroupViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstra
 	 * Check if the object has the frontendUserGroup
 	 *
 	 * @param object $user The Object to check
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup $frontendUserGroup
+	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUserGroup $frontendUserGroup
 	 * @return boolean
-	 * @author Thomas Allmer <at@delusionworld.com>
 	 */
-	public function render($user, \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup $frontendUserGroup) {
+	public function render($user, \TYPO3\RegisterBase\Domain\Model\FrontendUserGroup $frontendUserGroup) {
 		if ($user->hasFrontendUserGroup($frontendUserGroup)) {
 			return TRUE;
 		}
