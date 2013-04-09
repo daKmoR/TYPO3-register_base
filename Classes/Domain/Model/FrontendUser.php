@@ -96,6 +96,12 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	protected $usergroup;
 
 	/**
+	 * @var string
+	 * @validate notEmpty
+	 */
+	protected $country;
+
+	/**
 	 * Constructs a new Front-End User
 	 */
 	public function __construct($username = '', $password = '') {

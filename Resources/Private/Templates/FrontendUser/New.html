@@ -48,9 +48,10 @@
 				<td><f:form.textfield property="city" id="city" /></td>
 			</tr>
 			<tr>
-				<td><label for="country">Land:</label></td>
+				<td><label for="country">Land*:</label></td>
 				<td><f:form.textfield property="country" id="country" /></td>
 			</tr>
+			<f:render partial="FormErrorFor" arguments="{for: 'newFrontendUser.country'}" />
 			<tr>
 				<td><label for="telephone">Telefon:</label></td>
 				<td><f:form.textfield property="telephone" id="telephone" /></td>
