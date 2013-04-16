@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-03-12T13:48:10Z" product-name="comments_base">
+		<header/>
+		<body>
+
+			<trans-unit id="newFrontendUser.username">
+				<source>Benutzername</source>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.password">
+				<source>Passwort</source>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.firstName">
+				<source>Vorname</source>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.lastName">
+				<source>Nachname</source>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.email">
+				<source>E-Mail</source>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.company">
+				<source>Firmenname</source>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.address">
+				<source>Strasse</source>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.zip">
+				<source>PLZ</source>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.city">
+				<source>Ort</source>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.country">
+				<source>Land</source>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.telephone">
+				<source>Telefon</source>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.gtc">
+				<source>AGB gelesen und akzeptiert</source>
+			</trans-unit>
+
+
+			<trans-unit id="error.1221560718">
+				<source>Das Feld muss ausgefüllt werden.</source>
+			</trans-unit>
+			<trans-unit id="error.1221565130">
+				<source>Das Feld muss ausgefüllt werden.</source>
+			</trans-unit>
+			<trans-unit id="error.1360850597">
+				<source>Der Benutzername ist bereits vergeben.</source>
+			</trans-unit>
+			<trans-unit id="error.1221559976">
+				<source>Die E-Mail muss gültig sein.</source>
+			</trans-unit>
+			<trans-unit id="error.1360850585">
+				<source>Die E-Mail ist bereits vergeben.</source>
+			</trans-unit>
+			<trans-unit id="error.1362149169">
+				<source>Sie müssen mindestens einen Bereich auswählen.</source>
+			</trans-unit>
+
+
+			<trans-unit id="account.notFound">
+				<source>Der Benutzer wurde nicht gefunden.</source>
+			</trans-unit>
+			<trans-unit id="account.isActive">
+				<source>Der Benutzer ist bereits aktiv.</source>
+			</trans-unit>
+			<trans-unit id="account.activated">
+				<source>Der Benutzer wurde aktiviert.</source>
+			</trans-unit>
+
+
+			<trans-unit id="activation.header">
+				<source><![CDATA[Vielen Dank für Ihr Interesse an der <br /> iSi Rezeptdatenbank!]]></source>
+			</trans-unit>
+			<trans-unit id="activation.info">
+				<source>Um Ihre Registrierung abzuschließen, fehlt nur noch ein Klick auf folgenden Link:</source>
+			</trans-unit>
+
+
+			<trans-unit id="new.info1">
+				<source>Bitten füllen Sie das untenstehende Formular aus.</source>
+			</trans-unit>
+			<trans-unit id="new.info2">
+				<source>Als angemeldeter Benutzer genießen Sie viele Vorteile: Sie haben vollen Zugriff auf den iSi Experten-Blog und zu den kreativen Rezepten aus der iSi Rezeptdatenbank. Weiters haben Sie zusätzlich auch die Möglichkeit sich für den iSi Newsletter zu registrieren.</source>
+			</trans-unit>
+			<trans-unit id="new.groupInfo">
+				<source>Ich nutze iSi für:</source>
+			</trans-unit>
+			<trans-unit id="new.submit">
+				<source>Jetzt Registrieren</source>
+			</trans-unit>
+
+
+			<trans-unit id="edit.submit">
+				<source>Speichern</source>
+			</trans-unit>
+			<trans-unit id="edit.passwordInfo">
+				<source>Um Ihr Passwort zu ändern verwenden Sie bitte folgendes Formular:</source>
+			</trans-unit>
+			<trans-unit id="edit.newPassword">
+				<source>neues Passwort</source>
+			</trans-unit>
+
+
+			<trans-unit id="delete.header">
+				<source>Ihr Benutzer wurde gelöscht.</source>
+			</trans-unit>
+			<trans-unit id="delete.info">
+				<source>Sie werde keine weiteren Newsletter erhalten. Sollten Sie wieder Interesse an diesem Service haben müssen Sie sich neu anmelden.</source>
+			</trans-unit>
+
+
+			<trans-unit id="create.header">
+				<source>Ihr Benutzer wurde angelegt.</source>
+			</trans-unit>
+			<trans-unit id="create.info">
+				<source>Bitte kontrollieren Sie ihren Posteingang und führen Sie die Anweisungen in der E-Mail aus um Ihren Benutzer zu bestätigen.</source>
+			</trans-unit>
+
+		</body>
+	</file>
+</xliff>

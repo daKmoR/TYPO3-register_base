@@ -25,8 +25,8 @@
 			<tr>
 				<td><img width="30" alt="clear" src="typo3conf/ext/isi_recipes/Resources/Public/Css/Images/clear.gif" /></td>
 				<td id="content">
-					<h1>Vielen Dank für Ihr Interesse an der <br /> iSi Rezeptdatenbank!</h1>
-					<p>Um Ihre Registrierung abzuschließen, fehlt nur noch ein Klick auf folgenden Link:</p>
+					<h1><f:translate key="activation.header" /></h1>
+					<p><f:translate key="activation.info" /></p>
 					<p style="width: 649px;">
 						<f:link.action pageUid="132" action="confirm" controller="FrontendUser" extensionName="registerBase" pluginName="Form" arguments="{authCode: frontendUser.mailHash}" absolute="true" noCacheHash="true">
 							<css:breakOnCharacter>

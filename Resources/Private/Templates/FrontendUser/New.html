@@ -2,8 +2,8 @@
 
 <f:section name="main">
 
-	<p>Bitten füllen Sie das untenstehende Formular aus.</p>
-	<p>Als angemeldeter Benutzer genießen Sie viele Vorteile: Sie haben vollen Zugriff auf den iSi Experten-Blog und zu den kreativen Rezepten aus der iSi Rezeptdatenbank. Weiters haben Sie zusätzlich auch die Möglichkeit sich für den iSi Newsletter zu registrieren.</p>
+	<p><f:translate key="new.info1" /></p>
+	<p><f:translate key="new.info2" /></p>
 
 	<f:form action="create" name="newFrontendUser" object="{newFrontendUser}">
 
@@ -63,7 +63,7 @@
 			<f:render partial="FormErrorFor" arguments="{for: 'newFrontendUser.gtc'}" />
 		</table>
 
-		<p class="red">Ich nutze iSi für:</p>
+		<p class="red"><f:translate key="new.groupInfo" /></p>
 		<table class="hpcheck">
 			<f:for each="{frontendUserGroups}" as="frontendUserGroup">
 				<tr>
@@ -77,7 +77,7 @@
 
 		<br />
 
-		<f:form.submit value="Jetzt Registrieren" />
+		<button type="submit"><f:translate key="new.submit" /></button>
 	</f:form>
 
 </f:section>

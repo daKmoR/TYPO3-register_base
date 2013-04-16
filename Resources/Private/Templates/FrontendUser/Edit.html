@@ -52,7 +52,7 @@
 			</tr>
 		</table>
 
-		<p class="red">Ich nutze iSi für:</p>
+		<p class="red"><f:translate key="new.groupInfo" /></p>
 		<table class="hpcheck">
 			<f:for each="{frontendUserGroups}" as="frontendUserGroup">
 				<tr>
@@ -70,20 +70,20 @@
 		</table>
 		<br />
 
-		<f:form.submit value="Speichern"  style="margin-left: 73px;" />
+		<button type="submit" style="margin-left: 73px;"><f:translate key="edit.submit" /></button>
 	</f:form>
 
-	<h2>Um Ihr Passwort zu ändern verwenden Sie bitte folgendes Formular:</h2>
+	<h2><f:translate key="edit.passwordInfo" /></h2>
 
 	<f:form action="update" name="frontendUser" object="{frontendUser}" >
 		<table>
 			<tr>
-				<td><label for="password">neues Passwort:</label></td>
+				<td><label for="password"><f:translate key="edit.newPassword" /></label></td>
 				<td><f:form.textfield name="frontendUser[password]" id="password" /></td>
 			</tr>
 		</table>
 
-		<f:form.submit value="Speichern" />
+		<button type="submit"><f:translate key="edit.submit" /></button>
 	</f:form>
 
 </f:section>
