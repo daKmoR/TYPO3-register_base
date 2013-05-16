@@ -59,6 +59,12 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	protected $hashService;
 
 	/**
+	 * @var \SJBR\StaticInfoTables\Domain\Repository\CountryRepository
+	 * @inject
+	 */
+	protected $countryRepository;
+
+	/**
 	 * @var \TYPO3\CMS\Core\Mail\MailMessage
 	 * @inject
 	 */
@@ -84,9 +90,11 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 			$newFrontendUser->setGtc(true);
 		}
 
-		$this->view->assign('newFrontendUser', $newFrontendUser);
-
+		$countries = $this->countryRepository->findAll();
 		$frontendUserGroups = $this->frontendUserGroupRepository->findByShowInFrontend(1);
+
+		$this->view->assign('countries', $countries);
+		$this->view->assign('newFrontendUser', $newFrontendUser);
 		$this->view->assign('frontendUserGroups', $frontendUserGroups);
 
 //		$this->categoryRepository->setDefaultOrderings(array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
@@ -144,7 +152,9 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 //		$this->view->assign('categories', $categories);
 
 		$frontendUserGroups = $this->frontendUserGroupRepository->findByShowInFrontend(1);
+		$countries = $this->countryRepository->findAll();
 
+		$this->view->assign('countries', $countries);
 		$this->view->assign('frontendUser', $frontendUser);
 		$this->view->assign('frontendUserGroups', $frontendUserGroups);
 

@@ -49,7 +49,7 @@
 			</tr>
 			<tr>
 				<td><label for="country"><f:translate key="newFrontendUser.country" />*:</label></td>
-				<td><f:form.textfield property="country" id="country" /></td>
+				<td><f:form.select property="country" id="country" options="{countries}" optionValueField="shortNameEn" optionLabelField="shortNameEn" /> </td>
 			</tr>
 			<f:render partial="FormErrorFor" arguments="{for: 'newFrontendUser.country'}" />
 			<tr>
