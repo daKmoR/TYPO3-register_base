@@ -112,6 +112,18 @@
 				<source>I use iSi as:</source>
 				<target>Ich nutze iSi für:</target>
 			</trans-unit>
+			<trans-unit id="new.newsletters">
+				<source>Newsletters</source>
+				<target>Newsletter</target>
+			</trans-unit>
+			<trans-unit id="new.newslettersCheckbox">
+				<source>yes I would like to get newsletters</source>
+				<target>ja ich möchte Newsletter empfangen</target>
+			</trans-unit>
+			<trans-unit id="new.newslettersGroupsInfo">
+				<source>the following categories would interest me:</source>
+				<target>die folgenden Kategorien würden mich interessieren</target>
+			</trans-unit>
 			<trans-unit id="new.submit">
 				<source>Register now</source>
 				<target>Jetzt Registrieren</target>
