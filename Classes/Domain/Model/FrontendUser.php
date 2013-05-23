@@ -81,7 +81,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	 *
 	 * @var boolean
 	 */
-	protected $newsletters;
+	protected $newsletters = FALSE;
 
 	/**
 	 * If the user gets newsletters let them be in the html format
