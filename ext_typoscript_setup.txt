@@ -25,9 +25,10 @@ config.tx_extbase {
 					tableName = fe_users
 					#recordType = Tx_RegisterBase_FrontendUser
 					columns {
+						mailchimp_groups.mapOnProperty = mailChimpGroups
 						mailhash.mapOnProperty = mailHash
+						newsletters.mapOnProperty = newsletters
 						module_sys_dmail_category.mapOnProperty = categories
-						module_sys_dmail_newsletter.mapOnProperty = newsletter
 						module_sys_dmail_html.mapOnProperty = newsletterHtmlFormat
 					}
 				}

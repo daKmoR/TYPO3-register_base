@@ -4,6 +4,8 @@
 CREATE TABLE fe_users (
 	mailhash varchar(60) DEFAULT '',
 	gtc tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	mailchimp_groups varchar(400) DEFAULT '',
+	newsletters tinyint(4) unsigned DEFAULT '0' NOT NULL,
 );
 
 #

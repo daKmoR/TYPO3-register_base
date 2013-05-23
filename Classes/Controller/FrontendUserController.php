@@ -92,6 +92,10 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 
 		$countries = $this->countryRepository->findAll();
 		$frontendUserGroups = $this->frontendUserGroupRepository->findByShowInFrontend(1);
+		if ($this->settings['mailChimpGroups'] !== '') {
+			$mailChimpGroups = array_map('trim', explode(',', $this->settings['mailChimpGroups']));
+			$this->view->assign('mailChimpGroups', $mailChimpGroups);
+		}
 
 		$this->view->assign('countries', $countries);
 		$this->view->assign('newFrontendUser', $newFrontendUser);
@@ -111,7 +115,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		$newFrontendUser->disable();
 		$newFrontendUser->setName();
 
-		$newFrontendUser->setNewsletter(TRUE);
+		$newFrontendUser->setNewsletters(TRUE);
 		$newFrontendUser->setNewsletterHtmlFormat(TRUE);
 
 		if ($newFrontendUser->getUsername() === '') {
@@ -153,6 +157,10 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 
 		$frontendUserGroups = $this->frontendUserGroupRepository->findByShowInFrontend(1);
 		$countries = $this->countryRepository->findAll();
+		if ($this->settings['mailChimpGroups'] !== '') {
+			$mailChimpGroups = array_map('trim', explode(',', $this->settings['mailChimpGroups']));
+			$this->view->assign('mailChimpGroups', $mailChimpGroups);
+		}
 
 		$this->view->assign('countries', $countries);
 		$this->view->assign('frontendUser', $frontendUser);

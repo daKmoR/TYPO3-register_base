@@ -81,7 +81,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	 *
 	 * @var boolean
 	 */
-	protected $newsletter;
+	protected $newsletters;
 
 	/**
 	 * If the user gets newsletters let them be in the html format
@@ -97,6 +97,16 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 
 	/**
 	 * @var string
+	 */
+	protected $mailChimpGroups;
+
+	/**
+	 * @var array
+	 */
+	protected $mailChimpGroupsArray;
+
+	/**
+	 * @var string
 	 * @validate notEmpty
 	 */
 	protected $country;
@@ -107,6 +117,36 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	public function __construct($username = '', $password = '') {
 		parent::__construct($username, $password);
 		$this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+	}
+
+	/**
+	 * @param string $mailChimpGroups
+	 */
+	public function setMailChimpGroups($mailChimpGroups) {
+		$this->mailChimpGroups = $mailChimpGroups;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getMailChimpGroups() {
+		return $this->mailChimpGroups;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getMailChimpGroupsArray() {
+		return array_map('trim', explode(',', $this->getMailChimpGroups()));
+	}
+
+	/**
+	 * @param array $mailChimpGroupsArray
+	 */
+	public function setMailChimpGroupsArray($mailChimpGroupsArray) {
+		$array = implode(',', $mailChimpGroupsArray);
+		$this->setMailChimpGroups($array);
+		$this->mailChimpGroupsArray = $array;
 	}
 
 	/**
@@ -239,15 +279,15 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	/**
 	 * @param boolean $newsletter
 	 */
-	public function setNewsletter($newsletter) {
-		$this->newsletter = $newsletter;
+	public function setNewsletters($newsletter) {
+		$this->newsletters = $newsletter;
 	}
 
 	/**
 	 * @return boolean
 	 */
-	public function getNewsletter() {
-		return $this->newsletter;
+	public function getNewsletters() {
+		return $this->newsletters;
 	}
 
 	/**

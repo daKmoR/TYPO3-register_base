@@ -13,6 +13,7 @@ plugin.tx_registerbase {
 	settings {
 		forceAtLeastOneUserGroup = 0
 		baseUrl = {$baseUrl}
+		#mailChimpGroups = comma, separated, list, of, strings
 		Activation {
 			Activation {
 				subject = Registrierung bestätigen
