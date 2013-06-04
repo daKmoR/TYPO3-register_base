@@ -87,7 +87,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 
 		$form = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_registerbase_form');
 		if (array_key_exists('gtc', $form['newFrontendUser']) && $form['newFrontendUser']['gtc'] === '1') {
-			$newFrontendUser->setGtc(true);
+			$newFrontendUser->setGtc(TRUE);
 		}
 
 		$countries = $this->countryRepository->findAll();
@@ -104,6 +104,18 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 //		$this->categoryRepository->setDefaultOrderings(array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
 //		$categories = $this->categoryRepository->findAll();
 //		$this->view->assign('categories', $categories);
+	}
+
+	/**
+	 * if no newsletter is selected we have to init an empty array
+	 */
+	public function initializeCreateAction() {
+		$data = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_registerbase_form');
+		$newFrontendUser = $data['newFrontendUser'];
+		if ($newFrontendUser && $newFrontendUser['mailChimpGroupsArray'] === '') {
+			$newFrontendUser['mailChimpGroupsArray'] = array();
+			$this->request->setArgument('newFrontendUser', $newFrontendUser);
+		}
 	}
 
 	/**
