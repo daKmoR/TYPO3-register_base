@@ -114,15 +114,15 @@
 			</trans-unit>
 			<trans-unit id="new.newsletters">
 				<source>Newsletters</source>
-				<target>xxx</target>
+				<target>Newsletters</target>
 			</trans-unit>
 			<trans-unit id="new.newslettersCheckbox">
 				<source>yes I would like to get newsletters</source>
-				<target>xxx</target>
+				<target>Oui, je voudrais recevoir les newsletters</target>
 			</trans-unit>
 			<trans-unit id="new.newslettersGroupsInfo">
 				<source>the following categories would interest me:</source>
-				<target>xxx</target>
+				<target>Les catégories suivantes m’intéressent:</target>
 			</trans-unit>
 			<trans-unit id="new.submit">
 				<source>Register now</source>
