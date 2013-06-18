@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="es" datatype="plaintext" original="messages" date="2013-03-12T13:48:10Z" product-name="comments_base">
+		<header/>
+		<body>
+
+			<trans-unit id="newFrontendUser.username">
+				<source>User name</source>
+				<target>Nombre de usuario</target>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.password">
+				<source>Password</source>
+				<target>Contraseña</target>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.firstName">
+				<source>First name</source>
+				<target>Nombre</target>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.lastName">
+				<source>Surname</source>
+				<target>Apellido</target>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.email">
+				<source>Email</source>
+				<target>Correo electrónico</target>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.company">
+				<source>Company name</source>
+				<target>Nombre de la empresa</target>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.address">
+				<source>Street</source>
+				<target>Calle</target>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.zip">
+				<source>Zip code</source>
+				<target>C.P.</target>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.city">
+				<source>Location</source>
+				<target>Localidad</target>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.country">
+				<source>Country</source>
+				<target>País</target>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.telephone">
+				<source>Phone number</source>
+				<target>Teléfono</target>
+			</trans-unit>
+			<trans-unit id="newFrontendUser.gtc">
+				<source>I have read and accept the General Terms and Conditions.</source>
+				<target>He leído y acepto las condiciones generales</target>
+			</trans-unit>
+
+			<trans-unit id="error.1221560718">
+				<source>This is a required field.</source>
+				<target>Este campo se debe rellenar.</target>
+			</trans-unit>
+			<trans-unit id="error.1221565130">
+				<source>This is a required field.</source>
+				<target>Este campo se debe rellenar.</target>
+			</trans-unit>
+			<trans-unit id="error.1360850597">
+				<source>This username is already taken.</source>
+				<target>Ya existe un usuario con ese nombre de usuario.</target>
+			</trans-unit>
+			<trans-unit id="error.1221559976">
+				<source>You must enter a valid email address.</source>
+				<target>El correo electrónico debe ser válido.</target>
+			</trans-unit>
+			<trans-unit id="error.1360850585">
+				<source>This email address is already registered.</source>
+				<target>Ya existe un usuario con ese correo electrónico.</target>
+			</trans-unit>
+			<trans-unit id="error.1362149169">
+				<source>You must select at least one option.</source>
+				<target>Debe seleccionar como mínimo una área.</target>
+			</trans-unit>
+
+			<trans-unit id="account.notFound">
+				<source>The user account could not be found.</source>
+				<target>No se ha encontrado el usuario.</target>
+			</trans-unit>
+			<trans-unit id="account.isActive">
+				<source>This user account is already active.</source>
+				<target>El usuario ya está activado.</target>
+			</trans-unit>
+			<trans-unit id="account.activated">
+				<source>This user account is active.</source>
+				<target>Se ha activado el usuario.</target>
+			</trans-unit>
+
+			<trans-unit id="activation.header">
+				<source><![CDATA[Thank you for your interest in the <br /> iSi Recipe Collection!]]></source>
+				<target><![CDATA[¡Muchas gracias por su interés en la <br /> base de datos de recetas de iSi!]]></target>
+			</trans-unit>
+			<trans-unit id="activation.info">
+				<source>To complete your registration, all you have to do is click on the following link:</source>
+				<target>Para finalizar el registro solo falta que haga clic en el vínculo siguiente:</target>
+			</trans-unit>
+
+			<trans-unit id="new.info1">
+				<source>Please fill out the form below.</source>
+				<target>Por favor, rellene el formulario siguiente.</target>
+			</trans-unit>
+			<trans-unit id="new.info2">
+				<source>There are many benefits available to you as a registered user: You will have full access to our iSi Blog and to the creative recipes in our iSi Recipe Collection. Moreover, you will have the opportunity to register to receive our iSi newsletter.</source>
+				<target>Como usuario registrado, disfrutará de las siguientes ventajas: Tendrá acceso completo al blog de expertos de iSi y a las recetas creativas de la base de datos de recetas de iSi. Además, tendrá también la oportunidad de registrarse para recibir el boletín informativo de iSi.</target>
+			</trans-unit>
+			<trans-unit id="new.groupInfo">
+				<source>I use iSi as:</source>
+				<target>Utilizo iSi para:</target>
+			</trans-unit>
+			<trans-unit id="new.newsletters">
+				<source>Newsletters</source>
+				<target>Boletines de noticias</target>
+			</trans-unit>
+			<trans-unit id="new.newslettersCheckbox">
+				<source>yes I would like to get newsletters</source>
+				<target>Sí, me gustaría recibir los boletines</target>
+			</trans-unit>
+			<trans-unit id="new.newslettersGroupsInfo">
+				<source>the following categories would interest me:</source>
+				<target>Me interesan las siguientes categorias:</target>
+			</trans-unit>
+			<trans-unit id="new.submit">
+				<source>Register now</source>
+				<target>Registrar ahora</target>
+			</trans-unit>
+
+			<trans-unit id="edit.submit">
+				<source>Save</source>
+				<target>Guardar</target>
+			</trans-unit>
+			<trans-unit id="edit.passwordInfo">
+				<source>To change your password, please use the form below:</source>
+				<target>Para cambiar su contraseña, utilice el formulario siguiente:</target>
+			</trans-unit>
+			<trans-unit id="edit.newPassword">
+				<source>New password</source>
+				<target>Nueva contraseña</target>
+			</trans-unit>
+
+			<trans-unit id="delete.header">
+				<source>Your user account has been deleted.</source>
+				<target>Se ha eliminado el usuario.</target>
+			</trans-unit>
+			<trans-unit id="delete.info">
+				<source>You will not receive any further newsletters. If you would like receive this service in future, you will have to resubscribe.</source>
+				<target>No volverá a recibir el boletín informativo. Si más adelante está interesado en recibir este servicio, deberá volver a registrarse.</target>
+			</trans-unit>
+
+			<trans-unit id="create.header">
+				<source>Your user account has been created.</source>
+				<target>Se ha creado el usuario.</target>
+			</trans-unit>
+			<trans-unit id="create.info">
+				<source>Please check your inbox and follow the instructions in the email in order to activate your user account.</source>
+				<target>Consulte su correo electrónico y siga las instrucciones del mensaje para confirmar su usuario.</target>
+			</trans-unit>
+
+		</body>
+	</file>
+</xliff>
