@@ -41,6 +41,12 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	protected $frontendUserRepository;
 
 	/**
+	 * @var \TYPO3\RegisterBase\Api\RegisterApi
+	 * @inject
+	 */
+	protected $registerApi;
+
+	/**
 	 * @var \TYPO3\RegisterBase\Domain\Repository\CategoryRepository
 	 * @inject
 	 */
@@ -218,6 +224,34 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 */
 	public function deleteAction(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser) {
 		$this->frontendUserRepository->remove($frontendUser);
+	}
+
+	/**
+	 *
+	 */
+	public function webHookMailChimpAction() {
+		$key = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('mailChimpWebHookKey');
+		if ($key !== $this->settings['mailChimpWebHookKey']) {
+			die('Security key did not match. Did you set plugin.tx_registerbase.settings.mailChimpWebHookKey');
+		}
+
+		$type = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('type');
+		$data = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('data');
+
+		switch ($type) {
+			case 'unsubscribe':
+				$this->registerApi->unsubscribeByEmail($data['email']);
+				break;
+			case 'profile':
+				$this->registerApi->updateFromMailChimp($data);
+				break;
+			case 'upemail':
+				$this->registerApi->updateEmail($data['old_email'], $data['new_email']);
+				break;
+			case 'cleaned':
+				//ToDo Reason will be one of "hard" (for hard bounces) or "abuse"
+				$this->registerApi->unsubscribeByEmail($data['email']);
+		}
 	}
 
 	/**

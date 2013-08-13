@@ -7,11 +7,11 @@ if (!defined('TYPO3_MODE')) {
 	'TYPO3.' . $_EXTKEY,
 	'Form',
 	array(
-		'FrontendUser' => 'new, create, edit, editViaHash, editLoggedInFrontendUser, update, delete, deleteViaHash, confirm',
+		'FrontendUser' => 'new, create, edit, editViaHash, editLoggedInFrontendUser, update, delete, deleteViaHash, confirm, webHookMailChimp',
 	),
 	// non-cacheable actions
 	array(
-		'FrontendUser' => 'new, create, edit, editViaHash, editLoggedInFrontendUser, update, delete, deleteViaHash, confirm',
+		'FrontendUser' => 'new, create, edit, editViaHash, editLoggedInFrontendUser, update, delete, deleteViaHash, confirm, webHookMailChimp',
 	)
 );
 
