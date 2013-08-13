@@ -44,7 +44,7 @@ class RegisterApi {
 	 * @param $email
 	 */
 	public function unsubscribeByEmail($email) {
-		$user = $this->frontendUserRepository->findByEmail($email);
+		$user = $this->frontendUserRepository->findByEmail($email)->getFirst();
 		$user->setNewsletters(FALSE);
 	}
 
@@ -52,8 +52,18 @@ class RegisterApi {
 	 * @param $data array
 	 */
 	public function updateFromMailChimp($data) {
-		var_dump($data);
-		die('updateFromMailChimp');
+		$user = $this->frontendUserRepository->findByEmail($data['email'])->getFirst();
+		if ($user) {
+			if ($user->getFirstName() !== $data['merges']['FNAME']) {
+				$user->setFirstName($data['merges']['FNAME']);
+			}
+			if ($user->getLastName() !== $data['merges']['LNAME']) {
+				$user->setLastName($data['merges']['LNAME']);
+			}
+			if ($user->getMailChimpGroups() !== $data['merges']['INTERESTS']) {
+				$user->setMailChimpGroups($data['merges']['INTERESTS']);
+			}
+		}
 	}
 
 	/**
@@ -61,7 +71,7 @@ class RegisterApi {
 	 * @param $newEmail string
 	 */
 	public function updateEmail($oldEmail, $newEmail) {
-		$user = $this->frontendUserRepository->findByEmail($oldEmail);
+		$user = $this->frontendUserRepository->findByEmail($oldEmail)->getFirst();
 		$user->setEmail($newEmail);
 	}
 

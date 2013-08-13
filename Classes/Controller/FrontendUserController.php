@@ -227,12 +227,14 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	}
 
 	/**
+	 * usage: ?tx_registerbase_form%5Baction%5D=webHookMailChimp&tx_registerbase_form%5Bcontroller%5D=FrontendUser&mailChimpWebHookKey=TYPO3
 	 *
+	 * mailChimpWebHookKey can be defined via ts plugin.tx_registerbase.settings.mailChimpWebHookKey
 	 */
 	public function webHookMailChimpAction() {
 		$key = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('mailChimpWebHookKey');
 		if ($key !== $this->settings['mailChimpWebHookKey']) {
-			die('Security key did not match. Did you set plugin.tx_registerbase.settings.mailChimpWebHookKey');
+			die('Error: Security key did not match. Did you set plugin.tx_registerbase.settings.mailChimpWebHookKey');
 		}
 
 		$type = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('type');
@@ -251,7 +253,11 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 			case 'cleaned':
 				//ToDo Reason will be one of "hard" (for hard bounces) or "abuse"
 				$this->registerApi->unsubscribeByEmail($data['email']);
+				break;
+			default:
+				die('Error: no valid MailChimp Action defined');
 		}
+		die('webHookMailChimp DONE');
 	}
 
 	/**
