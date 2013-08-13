@@ -51,8 +51,10 @@ class RegisterApi {
 	 */
 	public function unsubscribeByEmail($email) {
 		$user = $this->frontendUserRepository->findByEmail($email)->getFirst();
-		$user->setNewsletters(FALSE);
-		$this->persistenceManager->persistAll();
+		if ($user) {
+			$user->setNewsletters(FALSE);
+			$this->persistenceManager->persistAll();
+		}
 	}
 
 	/**
@@ -80,8 +82,10 @@ class RegisterApi {
 	 */
 	public function updateEmail($oldEmail, $newEmail) {
 		$user = $this->frontendUserRepository->findByEmail($oldEmail)->getFirst();
-		$user->setEmail($newEmail);
-		$this->persistenceManager->persistAll();
+		if ($user) {
+			$user->setEmail($newEmail);
+			$this->persistenceManager->persistAll();
+		}
 	}
 
 }
