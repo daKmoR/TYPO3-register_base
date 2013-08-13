@@ -41,11 +41,18 @@ class RegisterApi {
 	protected $frontendUserRepository;
 
 	/**
+	 * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
+	 * @inject
+	 */
+	protected $persistenceManager;
+
+	/**
 	 * @param $email
 	 */
 	public function unsubscribeByEmail($email) {
 		$user = $this->frontendUserRepository->findByEmail($email)->getFirst();
 		$user->setNewsletters(FALSE);
+		$this->persistenceManager->persistAll();
 	}
 
 	/**
@@ -63,6 +70,7 @@ class RegisterApi {
 			if ($user->getMailChimpGroups() !== $data['merges']['INTERESTS']) {
 				$user->setMailChimpGroups($data['merges']['INTERESTS']);
 			}
+			$this->persistenceManager->persistAll();
 		}
 	}
 
@@ -73,6 +81,7 @@ class RegisterApi {
 	public function updateEmail($oldEmail, $newEmail) {
 		$user = $this->frontendUserRepository->findByEmail($oldEmail)->getFirst();
 		$user->setEmail($newEmail);
+		$this->persistenceManager->persistAll();
 	}
 
 }
