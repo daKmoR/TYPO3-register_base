@@ -82,6 +82,14 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	protected $embedCache;
 
 	/**
+	 *
+	 */
+	public function initializeAction() {
+		$this->registerApi->setMailChimpApiKey($this->settings['mailChimpApiKey']);
+		$this->registerApi->setMailChimpListId($this->settings['mailChimpListId']);
+	}
+
+	/**
 	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $newFrontendUser
 	 * @dontvalidate $newFrontendUser
 	 * @return void
@@ -133,7 +141,6 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		$newFrontendUser->disable();
 		$newFrontendUser->setName();
 
-		$newFrontendUser->setNewsletters(TRUE);
 		$newFrontendUser->setNewsletterHtmlFormat(TRUE);
 
 		if ($newFrontendUser->getUsername() === '') {
@@ -205,6 +212,13 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 
 		$this->frontendUserRepository->update($frontendUser);
 		$this->objectManager->get('Tx_Extbase_Persistence_Manager')->persistAll();
+
+		if ($frontendUser->getNewsletters()) {
+			$this->registerApi->mailChimpSubscribe($frontendUser);
+		} else {
+			$this->registerApi->mailChimpUnsubscribe($frontendUser);
+		}
+
 		$this->forward('edit', NULL, NULL, array('frontendUser' => $frontendUser, 'updateMessage' => 'Die Benutzerdaten wurden geändert.'));
 	}
 
@@ -274,6 +288,9 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 				$this->view->assign('userAlreadyActive', TRUE);
 			} else {
 				$frontendUser->enable();
+				if ($frontendUser->getNewsletters()) {
+					$this->registerApi->mailChimpSubscribe($frontendUser);
+				}
 				//$frontendUser = $this->changeUsergroupPostActivation($frontendUser);
 				//$this->sendEmailsPostConfirm($frontendUser);
 

@@ -47,6 +47,60 @@ class RegisterApi {
 	protected $persistenceManager;
 
 	/**
+	 * @var \MailChimp
+	 * @inject
+	 */
+	protected $mailChimp;
+
+	/**
+	 * @var string
+	 */
+	protected $mailChimpApiKey;
+
+	/**
+	 * @var string
+	 */
+	protected $mailChimpListId;
+
+	/**
+	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $user
+	 */
+	public function mailChimpSubscribe(\TYPO3\RegisterBase\Domain\Model\FrontendUser $user) {
+		$result = $this->mailChimp->call('lists/subscribe', array(
+			'id' => $this->getMailChimpListId(),
+			'email'             => array('email' => $user->getEmail()),
+			'merge_vars'        => array(
+				'FNAME' => $user->getFirstName(),
+				'LNAME' => $user->getLastName(),
+				'groupings' => array(
+					array(
+						'name' => 'Newsletters',
+						'groups' => $user->getMailChimpGroupsArray()
+					),
+				),
+			),
+			'double_optin'      => false,
+			'update_existing'   => true,
+			'replace_interests' => true,
+			'send_welcome'      => false,
+		));
+	}
+
+	/**
+	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $user
+	 */
+	public function mailChimpUnsubscribe(\TYPO3\RegisterBase\Domain\Model\FrontendUser $user) {
+		$result = $this->mailChimp->call('lists/unsubscribe', array(
+			'id' => $this->getMailChimpListId(),
+			'email'             => array('email' => $user->getEmail()),
+			'send_goodbye'      => false,
+			'update_existing'   => true,
+			'replace_interests' => true,
+			'send_welcome'      => false,
+		));
+	}
+
+	/**
 	 * @param $email
 	 */
 	public function unsubscribeByEmail($email) {
@@ -86,6 +140,35 @@ class RegisterApi {
 			$user->setEmail($newEmail);
 			$this->persistenceManager->persistAll();
 		}
+	}
+
+	/**
+	 * @param string $mailChimpApiKey
+	 */
+	public function setMailChimpApiKey($mailChimpApiKey) {
+		$this->mailChimpApiKey = $mailChimpApiKey;
+		$this->mailChimp->setApiKey($this->mailChimpApiKey);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getMailChimpApiKey() {
+		return $this->mailChimpApiKey;
+	}
+
+	/**
+	 * @param string $mailChimpListId
+	 */
+	public function setMailChimpListId($mailChimpListId) {
+		$this->mailChimpListId = $mailChimpListId;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getMailChimpListId() {
+		return $this->mailChimpListId;
 	}
 
 }
