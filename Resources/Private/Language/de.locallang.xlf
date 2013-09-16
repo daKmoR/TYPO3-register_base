@@ -99,6 +99,10 @@
 				<source>To complete your registration, all you have to do is click on the following link:</source>
 				<target>Um Ihre Registrierung abzuschließen, fehlt nur noch ein Klick auf folgenden Link:</target>
 			</trans-unit>
+			<trans-unit id="activation.footer">
+				<source>Your iSi Team</source>
+				<target>Ihr iSi-Team</target>
+			</trans-unit>
 
 			<trans-unit id="new.info1">
 				<source>Please fill out the form below.</source>

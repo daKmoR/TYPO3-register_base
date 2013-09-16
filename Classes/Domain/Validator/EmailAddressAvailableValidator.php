@@ -34,7 +34,7 @@ namespace TYPO3\RegisterBase\Domain\Validator;
  * @subpackage Validation\Validator
  * @version $Id$
  */
-class FrontendUserCreateValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
+class EmailAddressAvailableValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
 
 	/**
 	 * @var \TYPO3\RegisterBase\Domain\Repository\FrontendUserRepository
@@ -43,45 +43,33 @@ class FrontendUserCreateValidator extends \TYPO3\CMS\Extbase\Validation\Validato
 	protected $frontendUserRepository;
 
 	/**
-	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
+	 * @var \TYPO3\CMS\Extbase\Validation\Validator\EmailAddressValidator
 	 * @inject
 	 */
-	protected $configurationManager;
+	protected $emailAddressValidator;
 
 	/**
-	 * Checks if the new frontendUser email and username is available
+	 * Checks if the new frontendUser email is available
 	 *
 	 * @param mixed $frontendUser The value that should be validated
 	 * @return boolean TRUE if the value is valid, FALSE if an error occured
 	 */
 	public function isValid($frontendUser) {
-		$foundFrontendUser = $this->frontendUserRepository->findOneByEmail($frontendUser->getEmail());
 		$result = TRUE;
 
-		if ($foundFrontendUser && $foundFrontendUser->getUid() !== $frontendUser->getUid()) {
-			$this->result->forProperty('email')->addError(
-				new \TYPO3\CMS\Extbase\Error\Error('E-Mail is already taken.', 1360850585)
-			);
-			$result = FALSE;
+		if (!$this->emailAddressValidator->isValid($frontendUser->getEmail())) {
+			// do not add this Error for invalid e-mail addresses
+			return TRUE;
 		}
 
-		$foundFrontendUser = $this->frontendUserRepository->findOneByUsername($frontendUser->getUsername());
+		$foundFrontendUser = $this->frontendUserRepository->findOneByEmail($frontendUser->getEmail());
 		if ($foundFrontendUser && $foundFrontendUser->getUid() !== $frontendUser->getUid()) {
-			$this->result->forProperty('username')->addError(
-				new \TYPO3\CMS\Extbase\Error\Error('Username is already taken.', 1360850597)
-			);
-			$result = FALSE;
-		}
-
-		$settings = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
-		if ($settings['forceAtLeastOneUserGroup']) {
-			$userGroups = $frontendUser->getUsergroup();
-			if (count($userGroups) <= 0) {
-				$this->result->forProperty('usergroup')->addError(
-					new \TYPO3\CMS\Extbase\Error\Error('You have to choose at least ONE usergroup.', 1362149169)
+			if ($this->result) {
+				$this->result->forProperty('email')->addError(
+					new \TYPO3\CMS\Extbase\Error\Error('E-Mail is already taken.', 1360850585)
 				);
-				$result = FALSE;
 			}
+			$result = FALSE;
 		}
 
 		return $result;

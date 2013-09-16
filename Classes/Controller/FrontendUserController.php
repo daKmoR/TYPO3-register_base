@@ -134,30 +134,13 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 
 	/**
 	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $newFrontendUser
-	 * @validate $newFrontendUser \TYPO3\RegisterBase\Domain\Validator\FrontendUserCreateValidator
+	 * @validate $newFrontendUser \TYPO3\RegisterBase\Domain\Validator\EmailAddressAvailableValidator
+	 * @validate $newFrontendUser \TYPO3\RegisterBase\Domain\Validator\UsernameAvailableValidator
+	 * @validate $newFrontendUser \TYPO3\RegisterBase\Domain\Validator\GroupNeededValidator
 	 * @return void
 	 */
 	public function createAction(\TYPO3\RegisterBase\Domain\Model\FrontendUser $newFrontendUser) {
-		$newFrontendUser->disable();
-		$newFrontendUser->setName();
-
-		$newFrontendUser->setNewsletterHtmlFormat(TRUE);
-
-		if ($newFrontendUser->getUsername() === '') {
-			$newFrontendUser->setUsername();
-		}
-		if ($newFrontendUser->getPassword() === '') {
-			$tmpPassword = $this->hashService->generateHmac(\TYPO3\CMS\Core\Utility\GeneralUtility::generateRandomBytes(40));
-			$newFrontendUser->setPassword($tmpPassword);
-		}
-		$mailHash = $this->hashService->generateHmac($newFrontendUser->getUsername() . $newFrontendUser->getPassword());
-
-		$newFrontendUser->setMailHash($mailHash);
-
-		$this->frontendUserRepository->add($newFrontendUser);
-
-		$this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
-		$this->sendEmailsFor($newFrontendUser, 'Activation');
+		$this->registerApi->register($newFrontendUser);
 	}
 
 	/**
@@ -299,66 +282,6 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		} else {
 			$this->view->assign('userNotFound', TRUE);
 		}
-	}
-
-	/**
-	 * @param $name
-	 * @return object
-	 */
-	public function getEmailView($name) {
-		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-		$templateRootPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
-		$emailView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
-		$emailView->setTemplatePathAndFilename($templateRootPath . 'Email/' . $name . '.html');
-		$emailView->assign('templateRootPath', $templateRootPath);
-		$emailView->assign('settings', $this->settings);
-		return $emailView;
-	}
-
-	/**
-	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser
-	 * @param $for
-	 */
-	public function sendEmailsFor(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser, $for) {
-		if (is_array($this->settings[$for])) {
-			foreach($this->settings[$for] as $template => $mailSettings) {
-				$emailView = $this->getEmailView($template);
-				$emailView->assign('frontendUser', $frontendUser);
-				$body = $emailView->render();
-
-				foreach(array('fromEmail', 'fromName', 'toEmail', 'toName') as $property) {
-					if (strpos($mailSettings[$property], 'Function:') !== FALSE) {
-						$function = substr($mailSettings[$property], 9);
-						$mailSettings[$property] = $frontendUser->$function();
-					}
-				}
-
-				$this->mailMessage->setFrom(array($mailSettings['fromEmail'] => $mailSettings['fromName']));
-				$this->mailMessage->setTo(array($mailSettings['toEmail'] => $mailSettings['toName']));
-				$this->mailMessage->setSubject(sprintf($mailSettings['subject'], $frontendUser->getName(), $frontendUser->getEmail()));
-
-				$body = preg_replace_callback('/(<img [^>]*src=["|\'])([^"|\']+)/i', array(&$this, 'imageEmbed'), $body);
-				$this->mailMessage->setBody($body, 'text/html');
-				$this->mailMessage->send();
-			}
-		}
-	}
-
-	/**
-	 * @param $match
-	 * @return string
-	 */
-	private function imageEmbed($match) {
-		if ($this->embedCache === NULL) {
-			$this->embedCache = array();
-		}
-		$key = $match[2];
-		if (array_key_exists($key, $this->embedCache)) {
-			return $match[1] . $this->embedCache[$key];
-		}
-		$this->embedCache[$key] = $this->mailMessage->embed(\Swift_Image::fromPath($match[2]));
-
-		return $match[1] . $this->embedCache[$key];
 	}
 
 }

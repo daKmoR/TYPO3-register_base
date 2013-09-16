@@ -24,6 +24,7 @@ namespace TYPO3\RegisterBase\Api;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  *
@@ -47,6 +48,18 @@ class RegisterApi {
 	protected $persistenceManager;
 
 	/**
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+	 * @inject
+	 */
+	protected $objectManager;
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
+	 * @inject
+	 */
+	protected $hashService;
+
+	/**
 	 * @var \MailChimp
 	 * @inject
 	 */
@@ -61,6 +74,152 @@ class RegisterApi {
 	 * @var string
 	 */
 	protected $mailChimpListId;
+
+	/**
+	 * @var array
+	 */
+	protected $settings = array();
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
+	 * @inject
+	 */
+	protected $configurationManager;
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Validation\Validator\EmailAddressValidator
+	 * @inject
+	 */
+	protected $emailAddressValidator;
+
+	/**
+	 * @var \TYPO3\RegisterBase\Domain\Validator\EmailAddressAvailableValidator
+	 * @inject
+	 */
+	protected $emailAddressAvailableValidator;
+
+	/**
+	 * @var \TYPO3\RegisterBase\Domain\Validator\UsernameAvailableValidator
+	 * @inject
+	 */
+	protected $usernameAvailableValidator;
+
+	/**
+	 * @var \TYPO3\RegisterBase\Domain\Validator\GroupNeededValidator
+	 * @inject
+	 */
+	protected $groupNeededValidator;
+
+	/**
+	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $user
+	 * @return boolean
+	 */
+	public function register(\TYPO3\RegisterBase\Domain\Model\FrontendUser $user) {
+		$settings = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+		$this->settings = $settings['plugin.']['tx_registerbase.']['settings.'];
+
+		if (
+			$this->emailAddressValidator->isValid($user->getEmail()) &&
+			$this->emailAddressAvailableValidator->isValid($user) &&
+			$this->usernameAvailableValidator->isValid($user) &&
+			$this->groupNeededValidator->isValid($user)
+		) {
+			$user->disable();
+			$user->setName();
+
+			$user->setNewsletterHtmlFormat(TRUE);
+
+			if ($user->getUsername() === '') {
+				$user->setUsername();
+				$this->settings['usernameGenerated'] = TRUE;
+			}
+			if ($user->getPassword() === '') {
+				$tmpPassword = $this->hashService->generateHmac(\TYPO3\CMS\Core\Utility\GeneralUtility::generateRandomBytes(40));
+				$tmpPassword = substr($tmpPassword, 0, 8);
+				$user->setPassword($tmpPassword);
+				$this->settings['passwordGenerated'] = TRUE;
+			}
+			$mailHash = $this->hashService->generateHmac($user->getUsername() . $user->getPassword());
+			$user->setMailHash($mailHash);
+
+			$this->frontendUserRepository->add($user);
+
+			$this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
+			$this->sendEmailsFor($user, 'Activation');
+
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	/**
+	 * @param $name
+	 * @return object
+	 */
+	public function getEmailView($name) {
+		// removes last "." in name if found
+		$name = rtrim($name, '.');
+
+		$settings = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+		$templateRootPath = $settings['plugin.']['tx_registerbase.']['view.']['templateRootPath'];
+		$templateRootPath = GeneralUtility::getFileAbsFileName($templateRootPath);
+		$emailView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+		$emailView->setTemplatePathAndFilename($templateRootPath . 'Email/' . $name . '.html');
+		$emailView->assign('templateRootPath', $templateRootPath);
+		$emailView->assign('settings', $this->settings);
+		return $emailView;
+	}
+
+	/**
+	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser
+	 * @param $for
+	 */
+	public function sendEmailsFor(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser, $for) {
+		$for .= '.';
+		if (is_array($this->settings[$for])) {
+			foreach($this->settings[$for] as $template => $mailSettings) {
+				$emailView = $this->getEmailView($template);
+				$emailView->assign('frontendUser', $frontendUser);
+				$body = $emailView->render();
+
+				foreach(array('fromEmail', 'fromName', 'toEmail', 'toName') as $property) {
+					if (strpos($mailSettings[$property], 'Function:') !== FALSE) {
+						$function = substr($mailSettings[$property], 9);
+						$mailSettings[$property] = $frontendUser->$function();
+					}
+				}
+
+				$this->mailMessage->setFrom(array($mailSettings['fromEmail'] => $mailSettings['fromName']));
+				$this->mailMessage->setTo(array($mailSettings['toEmail'] => $mailSettings['toName']));
+				$this->mailMessage->setSubject(sprintf($mailSettings['subject'], $frontendUser->getName(), $frontendUser->getEmail()));
+
+				$body = preg_replace_callback('/(<img [^>]*src=["|\'])([^"|\']+)/i', array(&$this, 'imageEmbed'), $body);
+				$this->mailMessage->setBody($body, 'text/html');
+				$this->mailMessage->send();
+			}
+		}
+	}
+
+	/**
+	 * @param $match
+	 * @return string
+	 */
+	private function imageEmbed($match) {
+		if ($this->embedCache === NULL) {
+			$this->embedCache = array();
+		}
+		$key = $match[2];
+		if (array_key_exists($key, $this->embedCache)) {
+			return $match[1] . $this->embedCache[$key];
+		}
+		$this->embedCache[$key] = $this->mailMessage->embed(\Swift_Image::fromPath($match[2]));
+
+		return $match[1] . $this->embedCache[$key];
+	}
+
+/***************************************************************************************************
+ * Mail Chimp Functions
+ **************************************************************************************************/
 
 	/**
 	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $user

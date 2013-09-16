@@ -76,6 +76,9 @@
 			<trans-unit id="activation.info">
 				<source>To complete your registration, all you have to do is click on the following link:</source>
 			</trans-unit>
+			<trans-unit id="activation.footer">
+				<source>Your iSi Team</source>
+			</trans-unit>
 
 			<trans-unit id="new.info1">
 				<source>Please fill out the form below.</source>
