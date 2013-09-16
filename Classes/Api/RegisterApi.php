@@ -81,6 +81,12 @@ class RegisterApi {
 	protected $settings = array();
 
 	/**
+	 * @var \TYPO3\CMS\Core\Mail\MailMessage
+	 * @inject
+	 */
+	protected $mailMessage;
+
+	/**
 	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
 	 * @inject
 	 */

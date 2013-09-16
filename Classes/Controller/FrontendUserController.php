@@ -71,12 +71,6 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	protected $countryRepository;
 
 	/**
-	 * @var \TYPO3\CMS\Core\Mail\MailMessage
-	 * @inject
-	 */
-	protected $mailMessage;
-
-	/**
 	 * @var array
 	 */
 	protected $embedCache;
