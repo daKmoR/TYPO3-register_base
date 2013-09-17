@@ -181,21 +181,13 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 
 	/**
 	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser
-	 * @validate $frontendUser \TYPO3\RegisterBase\Domain\Validator\FrontendUserCreateValidator
+	 * @validate $frontendUser \TYPO3\RegisterBase\Domain\Validator\EmailAddressAvailableValidator
+	 * @validate $frontendUser \TYPO3\RegisterBase\Domain\Validator\UsernameAvailableValidator
+	 * @validate $frontendUser \TYPO3\RegisterBase\Domain\Validator\GroupNeededValidator
 	 * @return void
 	 */
 	public function updateAction(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser) {
-		$frontendUser->setName();
-
-		$this->frontendUserRepository->update($frontendUser);
-		$this->objectManager->get('Tx_Extbase_Persistence_Manager')->persistAll();
-
-		if ($frontendUser->getNewsletters()) {
-			$this->registerApi->mailChimpSubscribe($frontendUser);
-		} else {
-			$this->registerApi->mailChimpUnsubscribe($frontendUser);
-		}
-
+		$this->registerApi->update($frontendUser);
 		$this->forward('edit', NULL, NULL, array('frontendUser' => $frontendUser, 'updateMessage' => 'Die Benutzerdaten wurden geändert.'));
 	}
 
@@ -214,7 +206,7 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 	 * @return void
 	 */
 	public function deleteAction(\TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser) {
-		$this->frontendUserRepository->remove($frontendUser);
+		$this->registerApi->delete($frontendUser);
 	}
 
 	/**

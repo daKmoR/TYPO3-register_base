@@ -150,12 +150,45 @@ class RegisterApi {
 
 			$this->frontendUserRepository->add($user);
 
-			$this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
+			$this->persistenceManager->persistAll();
 			$this->sendEmailsFor($user, 'Activation');
 
 			return TRUE;
 		}
 		return FALSE;
+	}
+
+	/**
+	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $user
+	 * @return bool
+	 */
+	public function update(\TYPO3\RegisterBase\Domain\Model\FrontendUser $user) {
+		if (
+			$this->emailAddressValidator->isValid($user->getEmail()) &&
+			$this->emailAddressAvailableValidator->isValid($user) &&
+			$this->usernameAvailableValidator->isValid($user) &&
+			$this->groupNeededValidator->isValid($user)
+		) {
+			$user->setName();
+
+			$this->frontendUserRepository->update($user);
+			$this->persistenceManager->persistAll();
+
+			if ($user->getNewsletters()) {
+				$this->mailChimpSubscribe($user);
+			} else {
+				$this->mailChimpUnsubscribe($user);
+			}
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	/**
+	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $user
+	 */
+	public function delete(\TYPO3\RegisterBase\Domain\Model\FrontendUser $user) {
+		$this->frontendUserRepository->remove($user);
 	}
 
 	/**
