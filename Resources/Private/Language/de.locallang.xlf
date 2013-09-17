@@ -96,8 +96,8 @@
 				<target><![CDATA[Vielen Dank für Ihr Interesse an der <br /> iSi Rezeptdatenbank!]]></target>
 			</trans-unit>
 			<trans-unit id="activation.info">
-				<source>To complete your registration, all you have to do is click on the following link:</source>
-				<target>Um Ihre Registrierung abzuschließen, fehlt nur noch ein Klick auf folgenden Link:</target>
+				<source><![CDATA[Thank you for registering. As a registered user you can enjoy many advantages in addition to the receipt of the iSi Newsletter: you have full access to the iSi expert blog and the creative recipes available in the iSi recipe database.<br /><br />To complete your registration, just click on the following link:]]></source>
+				<target><![CDATA[Vielen Dank für Ihre Registrierung. Als registrierter Benutzer genießen Sie neben dem Erhalt der iSi Newsletter viele Vorteile: Sie haben vollen Zugriff auf den iSi Experten-Blog und zu den kreativen Rezepten der iSi Rezeptdatenbank.<br /><br />Um Ihre Registrierung abzuschließen, fehlt nur noch ein Klick auf folgenden Link:]]></target>
 			</trans-unit>
 			<trans-unit id="activation.footer">
 				<source>Your iSi Team</source>

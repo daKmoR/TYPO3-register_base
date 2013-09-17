@@ -34,7 +34,7 @@
 			</trans-unit>
 			<trans-unit id="newFrontendUser.zip">
 				<source>Zip code</source>
-				<target>C.P.</target>
+				<target>Código postal</target>
 			</trans-unit>
 			<trans-unit id="newFrontendUser.city">
 				<source>Location</source>
@@ -96,12 +96,12 @@
 				<target><![CDATA[¡Muchas gracias por su interés en la <br /> base de datos de recetas de iSi!]]></target>
 			</trans-unit>
 			<trans-unit id="activation.info">
-				<source>To complete your registration, all you have to do is click on the following link:</source>
-				<target>Para finalizar el registro solo falta que haga clic en el vínculo siguiente:</target>
+				<source><![CDATA[Thank you for registering. As a registered user you can enjoy many advantages in addition to the receipt of the iSi Newsletter: you have full access to the iSi expert blog and the creative recipes available in the iSi recipe database.<br /><br />To complete your registration, just click on the following link:]]></source>
+				<target><![CDATA[¡Muchas gracias por su registro! Como usuario registrado además de recibir el boletín disfrutará de muchas ventajas: acceso completo al blog-iSi de expertos y a las recetas creativas de la base de datos de recetas iSi.<br /><br />Para terminar su registro solo falta un clic sobre el siguiente enlace:]]></target>
 			</trans-unit>
 			<trans-unit id="activation.footer">
 				<source>Your iSi Team</source>
-				<target>Su equipo iSi</target>
+				<target>su Equipo iSi</target>
 			</trans-unit>
 
 

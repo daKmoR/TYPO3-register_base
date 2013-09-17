@@ -74,7 +74,7 @@
 				<source><![CDATA[Thank you for your interest in the <br /> iSi Recipe Collection!]]></source>
 			</trans-unit>
 			<trans-unit id="activation.info">
-				<source>To complete your registration, all you have to do is click on the following link:</source>
+				<source><![CDATA[Thank you for registering. As a registered user you can enjoy many advantages in addition to the receipt of the iSi Newsletter: you have full access to the iSi expert blog and the creative recipes available in the iSi recipe database.<br /><br />To complete your registration, just click on the following link:]]></source>
 			</trans-unit>
 			<trans-unit id="activation.footer">
 				<source>Your iSi Team</source>
