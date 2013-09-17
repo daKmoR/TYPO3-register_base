@@ -62,7 +62,8 @@ class EmailAddressAvailableValidator extends \TYPO3\CMS\Extbase\Validation\Valid
 			return TRUE;
 		}
 
-		$foundFrontendUser = $this->frontendUserRepository->findOneByEmail($frontendUser->getEmail());
+		$foundFrontendUser = $this->frontendUserRepository->findByEmail($frontendUser->getEmail());
+
 		if ($foundFrontendUser && $foundFrontendUser->getUid() !== $frontendUser->getUid()) {
 			if ($this->result) {
 				$this->result->forProperty('email')->addError(

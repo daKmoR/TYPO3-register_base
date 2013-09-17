@@ -53,4 +53,23 @@ class FrontendUserRepository extends \TYPO3\CMS\Extbase\Domain\Repository\Fronte
 		return $user;
 	}
 
+	/**
+	 * @param $email
+	 * @return \TYPO3\RegisterBase\Domain\Model\FrontendUser
+	 */
+	public function findByEmail($email) {
+		$query = $this->createQuery();
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+
+		$user = $query
+			->matching(
+				$query->equals('email', $email)
+			)
+			->setLimit(1)
+			->execute()
+			->getFirst();
+
+		return $user;
+	}
+
 }
