@@ -179,6 +179,19 @@ class FrontendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 		$this->redirect('edit', NULL, NULL, array('frontendUser' => $frontendUser));
 	}
 
+
+	/**
+	 * if no newsletter is selected we have to init an empty array
+	 */
+	public function initializeUpdateAction() {
+		$data = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_registerbase_edit');
+		$frontendUser = $data['frontendUser'];
+		if ($frontendUser && $frontendUser['mailChimpGroupsArray'] === '') {
+			$frontendUser['mailChimpGroupsArray'] = array();
+			$this->request->setArgument('frontendUser', $frontendUser);
+		}
+	}
+
 	/**
 	 * @param \TYPO3\RegisterBase\Domain\Model\FrontendUser $frontendUser
 	 * @validate $frontendUser \TYPO3\RegisterBase\Domain\Validator\EmailAddressAvailableValidator
