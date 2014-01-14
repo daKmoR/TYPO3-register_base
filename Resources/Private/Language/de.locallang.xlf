@@ -106,7 +106,7 @@
 
 			<trans-unit id="new.info1">
 				<source>Please fill out the form below.</source>
-				<target>Bitten füllen Sie das untenstehende Formular aus.</target>
+				<target>Bitte füllen Sie das untenstehende Formular aus.</target>
 			</trans-unit>
 			<trans-unit id="new.info2">
 				<source>There are many benefits available to you as a registered user: You will have full access to our iSi Blog and to the creative recipes in our iSi Recipe Collection. Moreover, you will have the opportunity to register to receive our iSi newsletter.</source>
