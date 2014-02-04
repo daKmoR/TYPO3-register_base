@@ -130,7 +130,7 @@
 			</trans-unit>
 			<trans-unit id="new.submit">
 				<source>Register now</source>
-				<target>Jetzt Registrieren</target>
+				<target>jetzt registrieren</target>
 			</trans-unit>
 
 			<trans-unit id="edit.submit">
