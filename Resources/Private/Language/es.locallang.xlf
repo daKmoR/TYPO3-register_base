@@ -92,18 +92,25 @@
 			</trans-unit>
 
 			<trans-unit id="activation.header">
-				<source><![CDATA[Thank you for your interest in the <br /> iSi Recipe Collection!]]></source>
-				<target><![CDATA[¡Muchas gracias por su interés en la <br /> base de datos de recetas de iSi!]]></target>
+				<source><![CDATA[Thank you for your interest in the iSi Recipe Collection!]]></source>
+				<target><![CDATA[¡Muchas gracias por su interés en la base de datos de recetas de iSi!]]></target>
 			</trans-unit>
 			<trans-unit id="activation.info">
-				<source><![CDATA[Thank you for registering. As a registered user you can enjoy many advantages in addition to the receipt of the iSi Newsletter: you have full access to the iSi expert blog and the creative recipes available in the iSi recipe database.<br /><br />To complete your registration, just click on the following link:]]></source>
-				<target><![CDATA[¡Muchas gracias por su registro! Como usuario registrado además de recibir el boletín disfrutará de muchas ventajas: acceso completo al blog-iSi de expertos y a las recetas creativas de la base de datos de recetas iSi.<br /><br />Para terminar su registro solo falta un clic sobre el siguiente enlace:]]></target>
+				<source><![CDATA[!!! Important: Your registration is only activated when you confirm <br /> %1$s!]]></source>
+				<target><![CDATA[¡¡¡ Aviso importante: Completará el proceso cuando haga <br /> %1$s para confirmar el registro!!!]]></target>
+			</trans-unit>
+			<trans-unit id="activation.link">
+				<source><![CDATA[by clicking this link]]></source>
+				<target><![CDATA[clic en este enlace <br />]]></target>
 			</trans-unit>
 			<trans-unit id="activation.footer">
 				<source>Your iSi Team</source>
 				<target>su Equipo iSi</target>
 			</trans-unit>
-
+			<trans-unit id="activation.footerInfo">
+				<source><![CDATA[If you cannot click on the link above, please copy the following link and paste it into the address bar of your browser:]]></source>
+				<target><![CDATA[Si no puede hacer click sobre el enlace anterior, copie el enlace siguiente y péguelo en la barra de búsqueda de su navegador:]]></target>
+			</trans-unit>
 
 			<trans-unit id="new.info1">
 				<source>Please fill out the form below.</source>

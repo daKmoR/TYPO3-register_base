@@ -71,13 +71,19 @@
 			</trans-unit>
 
 			<trans-unit id="activation.header">
-				<source><![CDATA[Thank you for your interest in the <br /> iSi Recipe Collection!]]></source>
+				<source><![CDATA[Thank you for your interest in the iSi Recipe Collection!]]></source>
 			</trans-unit>
 			<trans-unit id="activation.info">
-				<source><![CDATA[Thank you for registering. As a registered user you can enjoy many advantages in addition to the receipt of the iSi Newsletter: you have full access to the iSi expert blog and the creative recipes available in the iSi recipe database.<br /><br />To complete your registration, just click on the following link:]]></source>
+				<source><![CDATA[!!! Important: Your registration is only activated when you confirm <br /> %1$s!]]></source>
+			</trans-unit>
+			<trans-unit id="activation.link">
+				<source><![CDATA[by clicking this link]]></source>
 			</trans-unit>
 			<trans-unit id="activation.footer">
 				<source>Your iSi Team</source>
+			</trans-unit>
+			<trans-unit id="activation.footerInfo">
+				<source><![CDATA[If you cannot click on the link above, please copy the following link and paste it into the address bar of your browser:]]></source>
 			</trans-unit>
 
 			<trans-unit id="new.info1">

@@ -96,14 +96,21 @@
 				<target><![CDATA[Nous vous remercions pour l'intérêt <br /> que vous portez à la base de données de recettes iSi!]]></target>
 			</trans-unit>
 			<trans-unit id="activation.info">
-				<source><![CDATA[Thank you for registering. As a registered user you can enjoy many advantages in addition to the receipt of the iSi Newsletter: you have full access to the iSi expert blog and the creative recipes available in the iSi recipe database.<br /><br />To complete your registration, just click on the following link:]]></source>
-				<target><![CDATA[Merci de vous être enregistré. En étant utilisateur, vous profiterez en plus de la newsletter de plusieurs avantages : vous aurez accès complet au blog des experts iSi et aux recettes créatives de la banque de données iSi.<br /><br />Pour terminer l’enregistrement, veuillez cliquer sur le lien suivant:]]></target>
+				<source><![CDATA[!!! Important: Your registration is only activated when you confirm <br /> %1$s!]]></source>
+				<target><![CDATA[!!! Important: Votre inscription ne sera finalisée que si vous la confirmer en <br /> %1$s!]]></target>
+			</trans-unit>
+			<trans-unit id="activation.link">
+				<source><![CDATA[by clicking this link]]></source>
+				<target><![CDATA[cliquant sur ce lien]]></target>
 			</trans-unit>
 			<trans-unit id="activation.footer">
 				<source>Your iSi Team</source>
 				<target>Votre équipe iSi</target>
 			</trans-unit>
-
+			<trans-unit id="activation.footerInfo">
+				<source><![CDATA[If you cannot click on the link above, please copy the following link and paste it into the address bar of your browser:]]></source>
+				<target><![CDATA[Si vous ne pouvez pas cliquer sur le lien ci-dessus, copiez le lien suivant et insérez-le dans la barre d'adresse de votre navigateur:]]></target>
+			</trans-unit>
 
 			<trans-unit id="new.info1">
 				<source>Please fill out the form below.</source>

@@ -92,16 +92,24 @@
 			</trans-unit>
 
 			<trans-unit id="activation.header">
-				<source><![CDATA[Thank you for your interest in the <br /> iSi Recipe Collection!]]></source>
-				<target><![CDATA[Vielen Dank für Ihr Interesse an der <br /> iSi Rezeptdatenbank!]]></target>
+				<source><![CDATA[Thank you for your interest in the iSi Recipe Collection!]]></source>
+				<target><![CDATA[Vielen Dank für Ihr Interesse an der iSi Rezeptdatenbank!]]></target>
 			</trans-unit>
 			<trans-unit id="activation.info">
-				<source><![CDATA[Thank you for registering. As a registered user you can enjoy many advantages in addition to the receipt of the iSi Newsletter: you have full access to the iSi expert blog and the creative recipes available in the iSi recipe database.<br /><br />To complete your registration, just click on the following link:]]></source>
-				<target><![CDATA[Vielen Dank für Ihre Registrierung. Als registrierter Benutzer genießen Sie neben dem Erhalt der iSi Newsletter viele Vorteile: Sie haben vollen Zugriff auf den iSi Experten-Blog und zu den kreativen Rezepten der iSi Rezeptdatenbank.<br /><br />Um Ihre Registrierung abzuschließen, fehlt nur noch ein Klick auf folgenden Link:]]></target>
+				<source><![CDATA[!!! Important: Your registration is only activated when you confirm <br /> %1$s!]]></source>
+				<target><![CDATA[!!! Wichtig: Ihre Registrierung wird erst aktiv, wenn Sie diese <br /> %1$s bestätigen!]]></target>
+			</trans-unit>
+			<trans-unit id="activation.link">
+				<source><![CDATA[by clicking this link]]></source>
+				<target><![CDATA[mit Klick auf diesen Link <br />]]></target>
 			</trans-unit>
 			<trans-unit id="activation.footer">
 				<source>Your iSi Team</source>
 				<target>Ihr iSi-Team</target>
+			</trans-unit>
+			<trans-unit id="activation.footerInfo">
+				<source><![CDATA[If you cannot click on the link above, please copy the following link and paste it into the address bar of your browser:]]></source>
+				<target><![CDATA[Wenn Sie den obigen Link nicht anklicken können, kopieren Sie den folgenden Link und fügen Sie ihn in die Adress-Zeile Ihres Browsers ein:]]></target>
 			</trans-unit>
 
 			<trans-unit id="new.info1">
