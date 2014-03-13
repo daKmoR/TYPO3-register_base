@@ -105,7 +105,7 @@
 			</trans-unit>
 			<trans-unit id="activation.footer">
 				<source>Your iSi Team</source>
-				<target>su Equipo iSi</target>
+				<target>Su equipo iSi</target>
 			</trans-unit>
 			<trans-unit id="activation.footerInfo">
 				<source><![CDATA[If you cannot click on the link above, please copy the following link and paste it into the address bar of your browser:]]></source>

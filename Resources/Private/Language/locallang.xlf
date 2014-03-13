@@ -74,7 +74,7 @@
 				<source><![CDATA[Thank you for your interest in the iSi Recipe Collection!]]></source>
 			</trans-unit>
 			<trans-unit id="activation.info">
-				<source><![CDATA[!!! Important: Your registration is only activated when you confirm <br /> %1$s!]]></source>
+				<source><![CDATA[!!! Important: Your registration is only activated when you confirm it <br /> %1$s!]]></source>
 			</trans-unit>
 			<trans-unit id="activation.link">
 				<source><![CDATA[by clicking this link]]></source>

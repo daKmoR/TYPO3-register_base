@@ -92,8 +92,8 @@
 			</trans-unit>
 
 			<trans-unit id="activation.header">
-				<source><![CDATA[Thank you for your interest in the <br /> iSi Recipe Collection!]]></source>
-				<target><![CDATA[Nous vous remercions pour l'intérêt <br /> que vous portez à la base de données de recettes iSi!]]></target>
+				<source><![CDATA[Thank you for your interest in the iSi Recipe Collection!]]></source>
+				<target><![CDATA[Nous vous remercions pour l'intérêt que vous portez à la base de données de recettes iSi!]]></target>
 			</trans-unit>
 			<trans-unit id="activation.info">
 				<source><![CDATA[!!! Important: Your registration is only activated when you confirm <br /> %1$s!]]></source>
