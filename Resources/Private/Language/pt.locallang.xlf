@@ -49,7 +49,7 @@
       </trans-unit>
       <trans-unit id="newFrontendUser.gtc">
         <source>I have read and accept the General Terms and Conditions.</source>
-        <target>TCG lidas e aceitas</target>
+        <target>TCG lidos e aceitos</target>
       </trans-unit>
       <trans-unit id="error.1221560718">
         <source>This is a required field.</source>
@@ -93,11 +93,11 @@
       </trans-unit>
       <trans-unit id="activation.info">
         <source><![CDATA[!!! Important: Your registration is only activated when you confirm <br /> %1$s!]]></source>
-        <target><![CDATA[Muito obrigado por se cadastrar. Como usuário cadastrado, além de receber o iSi Newsletter, você desfruta de várias vantagens: Você tem pleno acesso ao Blog de Peritos iSi e às receitas criativas do banco de dados de receitas iSi.<br /><br />Para finalizar o seu cadastro falta apenas um clique no seguinte link:]]></target>
+        <target><![CDATA[!!! Importante: O seu cadastro somente se torna ativo, quando você o confirmar <br /> %1$s!]]></target>
       </trans-unit>
       <trans-unit id="activation.link">
         <source><![CDATA[by clicking this link]]></source>
-        <target><![CDATA[mit Klick auf diesen Link <br />]]></target>
+        <target><![CDATA[com um clique neste link]]></target>
       </trans-unit>
       <trans-unit id="activation.footer">
         <source>Your iSi Team</source>
@@ -105,7 +105,7 @@
       </trans-unit>
       <trans-unit id="activation.footerInfo">
         <source><![CDATA[If you cannot click on the link above, please copy the following link and paste it into the address bar of your browser:]]></source>
-        <target><![CDATA[Wenn Sie den obigen Link nicht anklicken können, kopieren Sie den folgenden Link und fügen Sie ihn in die Adress-Zeile Ihres Browsers ein:]]></target>
+        <target><![CDATA[Caso você não consiga clicar no link acima, copie o seguinte link e insira-o na linha de endereço do seu browser:]]></target>
       </trans-unit>
       <trans-unit id="new.info1">
         <source>Please fill out the form below.</source>
@@ -113,7 +113,7 @@
       </trans-unit>
       <trans-unit id="new.info2">
         <source>You have full access to advice from the iSi Global Culinary Ambassador and to the creative recipes in our iSi Recipe Collection. Moreover, you will have the opportunity to register to receive our iSi newsletter and to extend the warranty of your new product.</source>
-        <target>Como usuário cadastrado você desfruta de várias vantagens: Você tem pleno acesso ao Blog de Peritos iSi e às receitas criativas do banco de dados de receitas iSi. Além disso, você também tem a possibilidade de se cadastrar para o iSi Newsletter.</target>
+        <target>Como usuário cadastrado você desfruta de várias vantagens: Você tem acesso total às dicas do iSi Global Culinary Ambassador e às receitas criativas do banco de dados de receitas do iSi. Além disso, você possui a opção de se registrar para a newsletter do iSi e estender a garantia do seu novo dispositivo.</target>
       </trans-unit>
       <trans-unit id="new.groupInfo">
         <source>I use iSi as:</source>
